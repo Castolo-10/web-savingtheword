@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import img from '../img/shortlogo.png'
 
 export default class Navigation extends Component {
     render() {
