@@ -12,6 +12,7 @@ import Play from './components/Play'
 import Download from './components/Download'
 import Logout from './components/Logout'
 import Profile from './components/Profile'
+import Activities from './components/Activities'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/users" component={Users} />
         <Route path="/logout" component={Logout} />
         <Route path="/profile" component={Profile} />
+        <Route path="/activities" component={Activities}/>
       </div>
     </Router>
   );

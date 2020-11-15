@@ -10,6 +10,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import axios from 'axios'
 
@@ -18,6 +23,7 @@ import AutoLogIn from './AutoLogIn'
 var regex = {
   "name": /^[a-zA-Z0-9., ]{3,40}$/,
   "lastname": /^[a-zA-Z0-9., ]{3,40}$/,
+  "lastname2": /^[a-zA-Z0-9., ]{3,40}$/,
   "password": /^[a-zA-Z0-9_ !"#$%&'()*+,-./:;<=>?@^`{|}~\[/\]/\\/]{6,18}$/,
   "mail": /\S+@\S+\.\S+/
 };
@@ -26,7 +32,8 @@ var regexErrors = {
   "password": "La longitud de la contraseña debe ser de 6 a 18 caracteres (Permite mayúsculas, minúsculas, números y los siguientes caracteres: (espacio) ! \"\ # $ % & '( ) * + , - . / : ; < = > ? @ [ \\\ ] ^ _` { | } ~).",
   "mail": "El formato del correo no es válido.",
   "name": "El nombre debe tener entre 3 y 40 letras.",
-  "lastname": "Los apellidos deben tener entre 3 y 40 letras.",
+  "lastname": "El apellido paterno debe tener entre 3 y 40 letras.",
+  "lastname2": "El apellido materno debe tener entre 3 y 40 letras.",
   "confirm_password": "Las contraseñas no coinciden."
 };
 
@@ -34,14 +41,24 @@ export default class Signin extends Component {
 
   name_form = true;
   lastname_form = true;
+  lastname_form2 = true;
+  age_form = true;
+  gender_form = true;
+  grade_form = true;
   mail_form = true;
   password_form = true;
   confirm_password_form = true;
   existing_mail = false;
 
+  user_id = 0;
+
   state = {
     name: '',
     lastname: '',
+    lastname2: '',
+    age: -1,
+    gender: -1,
+    grade: 0,
     mail: '',
     password: '',
     confirm_password: '',
@@ -56,6 +73,30 @@ export default class Signin extends Component {
   onChangeLastName = (e) => {
     this.setState({
       lastname: e.target.value
+    })
+  }
+
+  onChangeLastName2 = (e) => {
+    this.setState({
+      lastname2: e.target.value
+    })
+  }
+
+  onChangeAge = (e) => {
+    this.setState({
+      age: e.target.value
+    })
+  }
+
+  onChangeGender = (e) => {
+    this.setState({
+      gender: e.target.value
+    })
+  }
+
+  onChangeGrade = (e) => {
+    this.setState({
+      grade: e.target.value
     })
   }
 
@@ -86,13 +127,21 @@ export default class Signin extends Component {
     var v4 = this.validate('password');
     var v5 = this.validate('confirm_password');
 
+    var v6 = this.validateCombo('age');
+    var v7 = this.validateCombo('gender');
+    var v8 = this.validateCombo('grade');
+
     this.name_form = v1;
     this.lastname_form = v2;
     this.mail_form = v3;
     this.password_form = v4;
     this.confirm_password_form = v5;
 
-    if (v1 && v2 && v3 && v4 && v5) {
+    this.age_form = v6;
+    this.gender_form = v7;
+    this.grade_form = v8;
+
+    if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8) {
       return true;
     }
     else {
@@ -102,32 +151,60 @@ export default class Signin extends Component {
     }
   }
 
-  onSubmitData = async (e) => {
-    e.preventDefault()
-    this.existing_mail = false;
-    //Aqui llamamos al post de usuario
-    if (this.validateForm() === true) {
-      const res = await axios.post('http://localhost:4000/api/usuarios', {
+submitUserInfo = async (e) => {
+  
+    if(this.validateForm()){
+    const res = await axios.post('http://localhost:4000/api/usuarios', {
         correo: this.state.mail,
         clave: this.state.password,
-      }
-      )
+      })
+      console.log(res);
+      
+    }
+    if(this.user_id>0){
+      await this.onSubmitData(this.user_id);
+    }
+  }
 
-      if (res.data.result !== 0) {
-        this.existing_mail = false;
+  onSubmitData = async (e) => {
+      e.preventDefault()
+      this.existing_mail = false;
+      if(this.validateForm()){
+          console.log('entra if validateForm');
+          console.log(this.state);
+          const res = await axios.post('localhost:4000/api/usuarios',{
+            correo: this.state.mail,
+            clave: this.state.password,
+            nombre: this.state.name,
+            aPaterno: this.state.lastname,
+            aMaterno: this.state.lastname2,
+            edad: this.state.age,
+            grado: this.state.grade,
+            genero: this.state.gender,
+          })
+          console.log(res);
+          if (res.data.result !== 0) {
+            this.existing_mail = false;
+            console.log('registrado');
+          }
+          else if (res.data.result === 0) {
+            this.existing_mail = true;
+            this.mail_form = false;
+            document.getElementById("confirm_password").value = "";
+            this.setState({ confirm_password: '' });
+            console.log('no registrado')
+            this.forceUpdate();
+          }
+
+        console.log('se supone que ya registra');
         AutoLogIn(this.state.mail, this.state.password);
         alert("Cuenta registrada exitosamente.");
         window.location = "http://localhost:3000/"
       }
-      else if (res.data.result === 0) {
-        this.existing_mail = true;
-        this.mail_form = false;
-        document.getElementById("confirm_password").value = "";
-        this.setState({ confirm_password: '' });
-      }
+      this.forceUpdate();
     }
-    this.forceUpdate();
-  }
+
+    
 
   validate(element) {
     // Preparacion
@@ -142,12 +219,18 @@ export default class Signin extends Component {
       val = this.state.lastname;
     }
 
+    if (element === 'lastname2') {
+      val = this.state.lastname2;
+    }
+
     if (element === 'mail') {
       val = this.state.mail;
     }
+
     if (element === 'password') {
       val = this.state.password;
     }
+
     if (element === 'confirm_password') {
       if (this.state.password === this.state.confirm_password) {
         return true;
@@ -164,10 +247,24 @@ export default class Signin extends Component {
     }
   }
 
+  validateCombo(element){
+    if(element === 'age'){
+      return (this.state.age > 4)? true:false;
+    }
+
+    if(element === 'gender'){
+      return(this.state.gender > -1)?true:false;
+    }
+
+    if(element === 'grade'){
+      return(this.state.grade>0)?true:false;
+    }
+  }
+
   ShowFormName() {
     if (this.name_form === true) {
       return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             autoComplete="fname"
             name="firstName"
@@ -184,7 +281,7 @@ export default class Signin extends Component {
     }
     else {
       return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             error
             autoComplete="fname"
@@ -205,13 +302,13 @@ export default class Signin extends Component {
   ShowFormLastName() {
     if (this.lastname_form === true) {
       return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6} sm={6}>
           <TextField
             variant="outlined"
             required
             fullWidth
             id="lastName"
-            label="Apellidos"
+            label="Apellido paterno"
             name="lastName"
             autoComplete="lname"
             onChange={this.onChangeLastName}
@@ -220,19 +317,202 @@ export default class Signin extends Component {
       )
     } else {
       return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6} sm={6}>
           <TextField
             error
             variant="outlined"
             required
             fullWidth
             id="lastName"
-            label="Apellidos"
+            label="Apellido paterno"
             name="lastName"
             autoComplete="lname"
             helperText={regexErrors['lastname']}
             onChange={this.onChangeLastName}
           />
+        </Grid>
+      )
+    }
+  }
+
+  ShowFormLastName2() {
+    if (this.lastname_form === true) {
+      return (
+        <Grid item xs={6} sm={6}>
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="lastName2"
+            label="Apellido materno"
+            name="lastName2"
+            autoComplete="lname2"
+            onChange={this.onChangeLastName}
+          />
+        </Grid>
+      )
+    } else {
+      return (
+        <Grid item xs={6} sm={6}>
+          <TextField
+            error
+            variant="outlined"
+            required
+            fullWidth
+            id="lastName2"
+            label="Apellido materno"
+            name="lastName2"
+            autoComplete="lname2"
+            helperText={regexErrors['lastname']}
+            onChange={this.onChangeLastName}
+          />
+        </Grid>
+      )
+    }
+  }
+
+  ShowFormAge(){
+    if(this.age_form === true){
+      return(
+        <Grid item sm={4}>
+          <FormControl className={useStyles.formControl}>
+          <InputLabel id="demo-simple-select-label">Edad</InputLabel>
+          <Select
+          labelId="age"
+          id="age"
+          value={this.state.age}
+          onChange={this.onChangeAge}
+        >
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={11}>11</MenuItem>
+          <MenuItem value={12}>12</MenuItem>
+          <MenuItem value={13}>13</MenuItem>
+          <MenuItem value={14}>14</MenuItem>
+          <MenuItem value={15}>15</MenuItem>
+          <MenuItem value={16}>Otra</MenuItem>
+        </Select>
+        </FormControl>
+        </Grid>
+      )
+    }
+    else{
+      return(
+          <Grid item sm={4} className={useStyles.form}>
+            <FormControl className={useStyles.formControl} error>
+          <InputLabel id="demo-simple-select-label">Edad</InputLabel>
+        <Select
+          labelId="age"
+          id="age"
+          value={this.state.age}
+          onChange={this.onChangeAge}
+        >
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={11}>11</MenuItem>
+          <MenuItem value={12}>12</MenuItem>
+          <MenuItem value={13}>13</MenuItem>
+          <MenuItem value={14}>14</MenuItem>
+          <MenuItem value={15}>15</MenuItem>
+          <MenuItem value={16}>Otra</MenuItem>
+        </Select>
+        <FormHelperText>Selecciona una opción</FormHelperText>
+        </FormControl>
+        </Grid>
+      )
+    }
+  }
+
+  ShowFormGender(){
+    if(this.gender_form === true){
+      return(
+        <Grid item sm={4}>
+          <FormControl className={useStyles.formControl}>
+          <InputLabel id="demo-simple-select-label">Género</InputLabel>
+      <Select
+          labelId="gender"
+          id="gender"
+          value={this.state.gender}
+          onChange={this.onChangeGender}
+        >
+          <MenuItem value={0}>Mujer</MenuItem>
+          <MenuItem value={1}>Hombre</MenuItem>
+        </Select>
+        </FormControl>
+        </Grid>
+      )
+    }
+    else{
+      return(
+          <Grid item sm={4} className={useStyles.form}>
+            <FormControl className={useStyles.formControl} error>
+          <InputLabel id="demo-simple-select-label">Género</InputLabel>
+        <Select
+          labelId="gender"
+          id="gender"
+          value={this.state.gender}
+          onChange={this.onChangeGender}
+        >
+          <MenuItem value={0}>Mujer</MenuItem>
+          <MenuItem value={1}>Hombre</MenuItem>
+        </Select>
+        <FormHelperText>Selecciona una opción</FormHelperText>
+        </FormControl>
+        </Grid>
+      )
+    }
+  }
+
+  ShowFormGrade(){
+    if(this.grade_form === true){
+      return(
+        <Grid item sm={4}>
+          <FormControl className={useStyles.formControl}>
+          <InputLabel id="demo-simple-select-label">Grado</InputLabel>
+      <Select
+          labelId="grade"
+          id="grade"
+          value={this.state.grade}
+          onChange={this.onChangeGrade}
+        >
+          <MenuItem value={1}>1º</MenuItem>
+          <MenuItem value={2}>2º</MenuItem>
+          <MenuItem value={3}>3º</MenuItem>
+          <MenuItem value={4}>4º</MenuItem>
+          <MenuItem value={5}>5º</MenuItem>
+          <MenuItem value={6}>6º</MenuItem>
+        </Select>
+        </FormControl>
+        </Grid>
+      )
+    } else{
+      return(
+        <Grid item sm={4}>
+          <FormControl className={useStyles.formControl} error>
+          <InputLabel id="demo-simple-select-label">Grado</InputLabel>
+      <Select
+          labelId="grade"
+          id="grade"
+          value={this.state.grade}
+          onChange={this.onChangeGrade}
+        >
+          <MenuItem value={1}>1º</MenuItem>
+          <MenuItem value={2}>2º</MenuItem>
+          <MenuItem value={3}>3º</MenuItem>
+          <MenuItem value={4}>4º</MenuItem>
+          <MenuItem value={5}>5º</MenuItem>
+          <MenuItem value={6}>6º</MenuItem>
+        </Select>
+        <FormHelperText>Selecciona una opción</FormHelperText>
+        </FormControl>
         </Grid>
       )
     }
@@ -385,6 +665,10 @@ export default class Signin extends Component {
               <Grid container spacing={2}>
                 {this.ShowFormName()}
                 {this.ShowFormLastName()}
+                {this.ShowFormLastName2()}
+                {this.ShowFormAge()}
+                {this.ShowFormGender()}
+                {this.ShowFormGrade()}
                 {this.ShowFormMail()}
                 {this.ShowFormPassword()}
                 {this.ShowFormConfirmPassword()}
@@ -442,5 +726,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
 }));
