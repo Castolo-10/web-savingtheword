@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -108,9 +107,8 @@ export default class Activities extends Component {
 
     showFormTv() {
         return (
-            <Grid item sm={4}>
-                <FormControl className={useStyles.formControl}>
-                    <InputLabel id="demo-simple-select-label">Televisión</InputLabel>
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
                     <Select
                         labelId="tv"
                         id="tv"
@@ -143,6 +141,7 @@ export default class Activities extends Component {
                         <MenuItem value={23}>23</MenuItem>
                         <MenuItem value={24}>24</MenuItem>
                     </Select>
+                    <FormHelperText>Televisión</FormHelperText>
                 </FormControl>
             </Grid>
         )
@@ -150,9 +149,8 @@ export default class Activities extends Component {
 
     showFormSeriesMovies() {
         return (
-            <Grid item sm={4}>
-                <FormControl className={useStyles.formControl}>
-                    <InputLabel id="demo-simple-select-label">Series y películas</InputLabel>
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
                     <Select
                         labelId="seriesmovies"
                         id="seriesmovies"
@@ -194,9 +192,8 @@ export default class Activities extends Component {
 
     showFormHomework() {
         return (
-            <Grid item sm={4}>
-                <FormControl className={useStyles.formControl}>
-                    <InputLabel id="demo-simple-select-label">Tareas</InputLabel>
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
                     <Select
                         labelId="homework"
                         id="homework"
@@ -229,6 +226,7 @@ export default class Activities extends Component {
                         <MenuItem value={23}>23</MenuItem>
                         <MenuItem value={24}>24</MenuItem>
                     </Select>
+                    <FormHelperText>Tareas</FormHelperText>
                 </FormControl>
             </Grid>
         )
@@ -236,14 +234,13 @@ export default class Activities extends Component {
 
     showFormStudy() {
         return (
-            <Grid item sm={4}>
-                <FormControl className={useStyles.formControl}>
-                    <InputLabel id="demo-simple-select-label">TV</InputLabel>
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
                     <Select
-                        labelId="tv"
-                        id="tv"
-                        value={this.state.tv}
-                        onChange={this.onChangeTv}
+                        labelId="study"
+                        id="study"
+                        value={this.state.study}
+                        onChange={this.onChangeStudy}
                     >
                         <MenuItem value={0}>0</MenuItem>
                         <MenuItem value={1}>1</MenuItem>
@@ -271,695 +268,351 @@ export default class Activities extends Component {
                         <MenuItem value={23}>23</MenuItem>
                         <MenuItem value={24}>24</MenuItem>
                     </Select>
+                    <FormHelperText>Estudiar(Repaso)</FormHelperText>
                 </FormControl>
             </Grid>
         )
     }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormReading() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="reading"
+                        id="reading"
+                        value={this.state.reading}
+                        onChange={this.onChangeReading}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Leer</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormPlayVideogames() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="play_videogames"
+                        id="play_videogames"
+                        value={this.state.play_videogames}
+                        onChange={this.onChangePlayVideogames}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Videojuegos</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormBoardGames() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="board_games"
+                        id="board_games"
+                        value={this.state.board_games}
+                        onChange={this.onChangeBoardGames}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Juegos de mesa</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormExcersise() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="excersise"
+                        id="excersise"
+                        value={this.state.excersise}
+                        onChange={this.onChangeExcersise}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Ejercicio</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormPhysicalGames() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="physical_games"
+                        id="physical_games"
+                        value={this.state.physical_games}
+                        onChange={this.onChangePhysicalGames}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Juegos de actividad física</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormNonPhysicalGames() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="non_physical_games"
+                        id="non_physical_games"
+                        value={this.state.non_physical_games}
+                        onChange={this.onChangeNonPhysicalGames}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Juegos sin actividad física</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
+    showFormSocialNetworks() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="social_networks"
+                        id="social_networks"
+                        value={this.state.social_networks}
+                        onChange={this.onChangeSocialNetworks}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Redes sociales</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
-    // showForm() {
-    //     if (this.form) {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl}>
-    //                     <InputLabel id="demo-simple-select-label">TV</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     } else {
-    //         return (
-    //             <Grid item sm={4}>
-    //                 <FormControl className={useStyles.formControl} error>
-    //                     <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-    //                     <Select
-    //                         labelId="tv"
-    //                         id="tv"
-    //                         value={this.state.tv}
-    //                         onChange={this.onChangeTv}
-    //                     >
-    //                         <MenuItem value={0}>0</MenuItem>
-    //                         <MenuItem value={1}>1</MenuItem>
-    //                         <MenuItem value={2}>2</MenuItem>
-    //                         <MenuItem value={3}>3</MenuItem>
-    //                         <MenuItem value={4}>4</MenuItem>
-    //                         <MenuItem value={5}>5</MenuItem>
-    //                         <MenuItem value={6}>6</MenuItem>
-    //                         <MenuItem value={7}>7</MenuItem>
-    //                         <MenuItem value={8}>8</MenuItem>
-    //                         <MenuItem value={9}>9</MenuItem>
-    //                         <MenuItem value={10}>10</MenuItem>
-    //                         <MenuItem value={11}>11</MenuItem>
-    //                         <MenuItem value={12}>12</MenuItem>
-    //                         <MenuItem value={13}>13</MenuItem>
-    //                         <MenuItem value={14}>14</MenuItem>
-    //                         <MenuItem value={15}>15</MenuItem>
-    //                         <MenuItem value={16}>16</MenuItem>
-    //                         <MenuItem value={17}>17</MenuItem>
-    //                         <MenuItem value={18}>18</MenuItem>
-    //                         <MenuItem value={19}>19</MenuItem>
-    //                         <MenuItem value={20}>20</MenuItem>
-    //                         <MenuItem value={21}>21</MenuItem>
-    //                         <MenuItem value={22}>22</MenuItem>
-    //                         <MenuItem value={23}>23</MenuItem>
-    //                         <MenuItem value={24}>24</MenuItem>
-    //                     </Select>
-    //                     <FormHelperText>Selecciona una opción</FormHelperText>
-    //                 </FormControl>
-    //             </Grid>
-    //         )
-    //     }
-    // }
-
+    showFormArtActivities() {
+        return (
+            <Grid item sm={3} xs={12}>
+                <FormControl variant="outlined" className={useStyles.formControl}>
+                    <Select
+                        labelId="art_activities"
+                        id="art_activities"
+                        value={this.state.art_activities}
+                        onChange={this.onChangeArtActivities}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={21}>21</MenuItem>
+                        <MenuItem value={22}>22</MenuItem>
+                        <MenuItem value={23}>23</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                    <FormHelperText>Actividades artísticas</FormHelperText>
+                </FormControl>
+            </Grid>
+        )
+    }
 
     render() {
         return (
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="md">
                 <CssBaseline />
                 <div className={useStyles.paper}>
                     <div align="center">
@@ -978,6 +631,15 @@ export default class Activities extends Component {
                                 {this.showFormTv()}
                                 {this.showFormSeriesMovies()}
                                 {this.showFormHomework()}
+                                {this.showFormStudy()}
+                                {this.showFormReading()}
+                                {this.showFormPlayVideogames()}
+                                {this.showFormBoardGames()}
+                                {this.showFormExcersise()}
+                                {this.showFormPhysicalGames()}
+                                {this.showFormNonPhysicalGames()}
+                                {this.showFormSocialNetworks()}
+                                {this.showFormArtActivities()}
                             </Grid>
                             <br />
                             <Button

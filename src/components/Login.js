@@ -70,14 +70,15 @@ export default class Login extends Component {
     e.preventDefault()
     //Aqui llamamos al post de usuario
     if (this.validateForm() === true) {
-      const res = await axios.post('http://localhost:4000/api/juego/login', {
+      const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/juego/login', {
         correo: this.state.mail,
         clave: this.state.password,
       }
       )
 
       if (res.data.result !== 0) {
-        localStorage.setItem('IdUsuario', res.data.data.id)
+        localStorage.setItem('IdUsuario', res.data.data.id);
+        localStorage.setItem('confirmado', res.data.data.confirmado);
         alert("Inicio de sesión exitoso.");
         window.location = "http://localhost:3000/"
       }

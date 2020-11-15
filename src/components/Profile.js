@@ -7,7 +7,7 @@ export default class Profile extends Component {
         mail: ''
     }
     async componentDidMount() {
-        const res = await axios.get(`http://localhost:4000/api/usuarios/${localStorage.getItem('IdUsuario')}`)
+        const res = await axios.get(`http://api-savingtheword.azurewebsites.net/api/usuarios/${localStorage.getItem('IdUsuario')}`)
         this.setState({ mail: res.data.data.Correo });
     }
 

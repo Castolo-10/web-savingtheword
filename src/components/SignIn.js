@@ -12,7 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
@@ -24,11 +23,14 @@ var regex = {
   "name": /^[a-zA-Z0-9., ]{3,40}$/,
   "lastname": /^[a-zA-Z0-9., ]{3,40}$/,
   "lastname2": /^[a-zA-Z0-9., ]{3,40}$/,
+  // eslint-disable-next-line
   "password": /^[a-zA-Z0-9_ !"#$%&'()*+,-./:;<=>?@^`{|}~\[/\]/\\/]{6,18}$/,
+  // eslint-disable-next-line
   "mail": /\S+@\S+\.\S+/
 };
 
 var regexErrors = {
+  // eslint-disable-next-line
   "password": "La longitud de la contraseña debe ser de 6 a 18 caracteres (Permite mayúsculas, minúsculas, números y los siguientes caracteres: (espacio) ! \"\ # $ % & '( ) * + , - . / : ; < = > ? @ [ \\\ ] ^ _` { | } ~).",
   "mail": "El formato del correo no es válido.",
   "name": "El nombre debe tener entre 3 y 40 letras.",
@@ -151,28 +153,14 @@ export default class Signin extends Component {
     }
   }
 
-submitUserInfo = async (e) => {
-  
-    if(this.validateForm()){
-    const res = await axios.post('http://localhost:4000/api/usuarios', {
-        correo: this.state.mail,
-        clave: this.state.password,
-      })
-      console.log(res);
-      
-    }
-    if(this.user_id>0){
-      await this.onSubmitData(this.user_id);
-    }
-  }
-
   onSubmitData = async (e) => {
       e.preventDefault()
+      document.getElementById("register-btn").disabled=true;
       this.existing_mail = false;
       if(this.validateForm()){
           console.log('entra if validateForm');
           console.log(this.state);
-          const res = await axios.post('localhost:4000/api/usuarios',{
+          const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/usuarios',{
             correo: this.state.mail,
             clave: this.state.password,
             nombre: this.state.name,
@@ -195,11 +183,7 @@ submitUserInfo = async (e) => {
             console.log('no registrado')
             this.forceUpdate();
           }
-
-        console.log('se supone que ya registra');
         AutoLogIn(this.state.mail, this.state.password);
-        alert("Cuenta registrada exitosamente.");
-        window.location = "http://localhost:3000/"
       }
       this.forceUpdate();
     }
@@ -375,9 +359,9 @@ submitUserInfo = async (e) => {
     if(this.age_form === true){
       return(
         <Grid item sm={4}>
-          <FormControl className={useStyles.formControl}>
-          <InputLabel id="demo-simple-select-label">Edad</InputLabel>
-          <Select
+          <FormControl variant="outlined" className={useStyles.formControl}>
+          <FormHelperText>Edad</FormHelperText>
+          <Select 
           labelId="age"
           id="age"
           value={this.state.age}
@@ -403,8 +387,8 @@ submitUserInfo = async (e) => {
     else{
       return(
           <Grid item sm={4} className={useStyles.form}>
-            <FormControl className={useStyles.formControl} error>
-          <InputLabel id="demo-simple-select-label">Edad</InputLabel>
+            <FormControl variant="outlined" className={useStyles.formControl} error>
+            <FormHelperText>Edad</FormHelperText>
         <Select
           labelId="age"
           id="age"
@@ -435,8 +419,8 @@ submitUserInfo = async (e) => {
     if(this.gender_form === true){
       return(
         <Grid item sm={4}>
-          <FormControl className={useStyles.formControl}>
-          <InputLabel id="demo-simple-select-label">Género</InputLabel>
+          <FormControl variant="outlined" className={useStyles.formControl}>
+          <FormHelperText>Género</FormHelperText>
       <Select
           labelId="gender"
           id="gender"
@@ -453,12 +437,13 @@ submitUserInfo = async (e) => {
     else{
       return(
           <Grid item sm={4} className={useStyles.form}>
-            <FormControl className={useStyles.formControl} error>
-          <InputLabel id="demo-simple-select-label">Género</InputLabel>
+            <FormControl variant="outlined" className={useStyles.formControl} error>
+            <FormHelperText>Género</FormHelperText>
         <Select
           labelId="gender"
           id="gender"
           value={this.state.gender}
+          placeholder="Género"
           onChange={this.onChangeGender}
         >
           <MenuItem value={0}>Mujer</MenuItem>
@@ -475,8 +460,8 @@ submitUserInfo = async (e) => {
     if(this.grade_form === true){
       return(
         <Grid item sm={4}>
-          <FormControl className={useStyles.formControl}>
-          <InputLabel id="demo-simple-select-label">Grado</InputLabel>
+          <FormControl variant="outlined" className={useStyles.formControl}>
+          <FormHelperText>Grado</FormHelperText>
       <Select
           labelId="grade"
           id="grade"
@@ -496,8 +481,8 @@ submitUserInfo = async (e) => {
     } else{
       return(
         <Grid item sm={4}>
-          <FormControl className={useStyles.formControl} error>
-          <InputLabel id="demo-simple-select-label">Grado</InputLabel>
+          <FormControl variant="outlined" className={useStyles.formControl} error>
+          <FormHelperText>Grado</FormHelperText>
       <Select
           labelId="grade"
           id="grade"
@@ -511,6 +496,7 @@ submitUserInfo = async (e) => {
           <MenuItem value={5}>5º</MenuItem>
           <MenuItem value={6}>6º</MenuItem>
         </Select>
+        
         <FormHelperText>Selecciona una opción</FormHelperText>
         </FormControl>
         </Grid>
@@ -675,6 +661,7 @@ submitUserInfo = async (e) => {
               </Grid>
               <br />
               <Button
+                id="register-btn"
                 type="submit"
                 fullWidth
                 variant="contained"
