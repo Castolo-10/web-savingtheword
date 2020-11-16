@@ -4,18 +4,32 @@ import img from '../img/shortlogo.png'
 
 export default class Navigation extends Component {
 
+    confirmado = localStorage.getItem('confirmado');
     isLogged() {
         var local = localStorage.getItem('IdUsuario');
         return (local !== null && local > 0) ? true : false;
     }
 
+    isConfirmed() {
+        var local = localStorage.getItem('confirmado');
+        return (local !== null && local > 0) ? true : false;
+    }
+
     ShowLogin() {
         if (this.isLogged()) {
-            return (
-                <Link className="navbar-brand" to="/profile">
-                    Perfil
-                </Link>
-            )
+            if(this.isConfirmed()){
+                return (
+                    <Link className="navbar-brand" to="/profile">
+                        Perfil
+                    </Link>
+                )
+            } else{
+                return (
+                    <Link className="navbar-brand" to="/activities">
+                        Perfil
+                    </Link>
+                )
+            }
         } else {
             return (
                 <Link className="navbar-brand" to="/login">

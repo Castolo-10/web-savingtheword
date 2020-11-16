@@ -160,7 +160,7 @@ export default class Signin extends Component {
       if(this.validateForm()){
           console.log('entra if validateForm');
           console.log(this.state);
-          const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/usuarios',{
+          const res = await axios.post('http://localhost:4000/api/usuarios',{
             correo: this.state.mail,
             clave: this.state.password,
             nombre: this.state.name,

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
 export default class Home extends Component {
+
   render() {
     return (
+      
       //<div className="col-12"></div>
       <body className="text-center">
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-
           <main role="main" className="inner cover">
             {/* <h1 className="cover-heading">Saving The Word</h1> */}
             <img src="../img/logo.png" alt="Logo" width="75%" />
@@ -15,7 +16,7 @@ export default class Home extends Component {
             </p>
           </main>
 
-          <footer className="mastfoot mt-auto">
+          <footer className="mastfoot mt-auto sticky-bottom">
             <div className="inner">
               <p>Aqui va el footer</p>
             </div>

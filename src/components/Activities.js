@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
@@ -19,6 +13,7 @@ import axios from 'axios'
 
 export default class Activities extends Component {
     state = {
+        user_id: localStorage.getItem('IdUsuario'),
         tv: 0,
         series_movies: 0,
         homework: 0,
@@ -35,75 +30,75 @@ export default class Activities extends Component {
 
     onChangeTv = (e) => {
         this.setState({
-          tv: e.target.value
+            tv: e.target.value
         })
-      }
+    }
 
-      onChangeSeriesMovies = (e) => {
+    onChangeSeriesMovies = (e) => {
         this.setState({
-          series_movies: e.target.value
+            series_movies: e.target.value
         })
-      }
+    }
 
-      onChangeHomework = (e) => {
+    onChangeHomework = (e) => {
         this.setState({
-          homework: e.target.value
+            homework: e.target.value
         })
-      }
+    }
 
-      onChangeStudy = (e) => {
+    onChangeStudy = (e) => {
         this.setState({
-          study: e.target.value
+            study: e.target.value
         })
-      }
+    }
 
-      onChangeReading = (e) => {
+    onChangeReading = (e) => {
         this.setState({
-          reading: e.target.value
+            reading: e.target.value
         })
-      }
+    }
 
-      onChangePlayVideogames = (e) => {
+    onChangePlayVideogames = (e) => {
         this.setState({
-          play_videogames: e.target.value
+            play_videogames: e.target.value
         })
-      }
+    }
 
-      onChangeBoardGames = (e) => {
+    onChangeBoardGames = (e) => {
         this.setState({
-          board_games: e.target.value
+            board_games: e.target.value
         })
-      }
+    }
 
-      onChangeExcersise = (e) => {
+    onChangeExcersise = (e) => {
         this.setState({
-          excersise: e.target.value
+            excersise: e.target.value
         })
-      }
+    }
 
-      onChangePhysicalGames = (e) => {
+    onChangePhysicalGames = (e) => {
         this.setState({
-          physical_games: e.target.value
+            physical_games: e.target.value
         })
-      }
+    }
 
-      onChangeNonPhysicalGames = (e) => {
+    onChangeNonPhysicalGames = (e) => {
         this.setState({
-          non_physical_games: e.target.value
+            non_physical_games: e.target.value
         })
-      }
+    }
 
-      onChangeSocialNetworks = (e) => {
+    onChangeSocialNetworks = (e) => {
         this.setState({
-          social_networks: e.target.value
+            social_networks: e.target.value
         })
-      }
+    }
 
-      onChangeArtActivities = (e) => {
+    onChangeArtActivities = (e) => {
         this.setState({
-          art_activities: e.target.value
+            art_activities: e.target.value
         })
-      }
+    }
 
     showFormTv() {
         return (
@@ -115,31 +110,19 @@ export default class Activities extends Component {
                         value={this.state.tv}
                         onChange={this.onChangeTv}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Televisión</FormHelperText>
                 </FormControl>
@@ -157,34 +140,22 @@ export default class Activities extends Component {
                         value={this.state.series_movies}
                         onChange={this.onChangeSeriesMovies}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Series y películas</FormHelperText>
-            
+
                 </FormControl>
             </Grid>
         )
@@ -200,31 +171,19 @@ export default class Activities extends Component {
                         value={this.state.homework}
                         onChange={this.onChangeHomework}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Tareas</FormHelperText>
                 </FormControl>
@@ -242,31 +201,19 @@ export default class Activities extends Component {
                         value={this.state.study}
                         onChange={this.onChangeStudy}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Estudiar(Repaso)</FormHelperText>
                 </FormControl>
@@ -284,31 +231,19 @@ export default class Activities extends Component {
                         value={this.state.reading}
                         onChange={this.onChangeReading}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Leer</FormHelperText>
                 </FormControl>
@@ -326,31 +261,19 @@ export default class Activities extends Component {
                         value={this.state.play_videogames}
                         onChange={this.onChangePlayVideogames}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Videojuegos</FormHelperText>
                 </FormControl>
@@ -368,31 +291,19 @@ export default class Activities extends Component {
                         value={this.state.board_games}
                         onChange={this.onChangeBoardGames}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Juegos de mesa</FormHelperText>
                 </FormControl>
@@ -410,31 +321,19 @@ export default class Activities extends Component {
                         value={this.state.excersise}
                         onChange={this.onChangeExcersise}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Ejercicio</FormHelperText>
                 </FormControl>
@@ -452,31 +351,19 @@ export default class Activities extends Component {
                         value={this.state.physical_games}
                         onChange={this.onChangePhysicalGames}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Juegos de actividad física</FormHelperText>
                 </FormControl>
@@ -494,31 +381,19 @@ export default class Activities extends Component {
                         value={this.state.non_physical_games}
                         onChange={this.onChangeNonPhysicalGames}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Juegos sin actividad física</FormHelperText>
                 </FormControl>
@@ -536,31 +411,19 @@ export default class Activities extends Component {
                         value={this.state.social_networks}
                         onChange={this.onChangeSocialNetworks}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Redes sociales</FormHelperText>
                 </FormControl>
@@ -578,36 +441,196 @@ export default class Activities extends Component {
                         value={this.state.art_activities}
                         onChange={this.onChangeArtActivities}
                     >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={11}>11</MenuItem>
-                        <MenuItem value={12}>12</MenuItem>
-                        <MenuItem value={13}>13</MenuItem>
-                        <MenuItem value={14}>14</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={16}>16</MenuItem>
-                        <MenuItem value={17}>17</MenuItem>
-                        <MenuItem value={18}>18</MenuItem>
-                        <MenuItem value={19}>19</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={21}>21</MenuItem>
-                        <MenuItem value={22}>22</MenuItem>
-                        <MenuItem value={23}>23</MenuItem>
-                        <MenuItem value={24}>24</MenuItem>
+                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={1}>1 hora</MenuItem>
+                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={3}>3 horas</MenuItem>
+                        <MenuItem value={4}>4 horas</MenuItem>
+                        <MenuItem value={5}>5 horas</MenuItem>
+                        <MenuItem value={6}>6 horas</MenuItem>
+                        <MenuItem value={7}>7 horas</MenuItem>
+                        <MenuItem value={8}>8 horas</MenuItem>
+                        <MenuItem value={9}>9 horas</MenuItem>
+                        <MenuItem value={10}>10 horas</MenuItem>
+                        <MenuItem value={11}>11 horas</MenuItem>
+                        <MenuItem value={12}>12 horas</MenuItem>
                     </Select>
                     <FormHelperText>Actividades artísticas</FormHelperText>
                 </FormControl>
             </Grid>
         )
+    }
+
+    submitUserInfo = (e) =>{
+        e.preventDefault();
+        this.submitActivities();
+        alert('Cuenta confirmada con éxito.');
+        window.location = 'http://localhost:3000/logout'
+    }
+
+    submitActivities = async () => {
+        await axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idAlumno: this.state.user_id,
+            actividades: [
+                {
+                    idActividad: 1,
+                    tiempo: this.state.tv,
+                },
+                {
+                    idActividad: 2,
+                    tiempo: this.state.series_movies,
+                },
+                {
+                    idActividad: 3,
+                    tiempo: this.state.homework,
+                },
+                {
+                    idActividad: 4,
+                    tiempo: this.state.study,
+                },
+                {
+                    idActividad: 5,
+                    tiempo: this.state.reading,
+                },
+                {
+                    idActividad: 6,
+                    tiempo: this.state.play_videogames,
+                },
+                {
+                    idActividad: 7,
+                    tiempo: this.state.board_games,
+                },
+                {
+                    idActividad: 8,
+                    tiempo: this.state.excersise,
+                },
+                {
+                    idActividad: 9,
+                    tiempo: this.state.physical_games,
+                },
+                {
+                    idActividad: 10,
+                    tiempo: this.state.non_physical_games,
+                },
+                {
+                    idActividad: 11,
+                    tiempo: this.state.social_networks,
+                },
+                {
+                    idActividad: 12,
+                    tiempo: this.state.art_activities,
+                }
+            ]
+        })
+        localStorage.setItem('confirmado', 1);
+    }
+
+    submitTimeTv = () =>{
+         const res = axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 1,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.tv,
+        })
+        console.log(res);
+    }
+
+    submitTimeSeriesMovies = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 2,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.series_movies,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeHomework = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 3,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.homework,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeStudy = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 4,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.study,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeReading = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 5,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.reading,
+        })
+        console.log('insertado');
+    }
+
+    submitTimePlayVideogames = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 6,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.play_videogames,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeBoardGames = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 7,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.board_games,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeExcersise = () =>{
+        axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 8,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.excersise,
+        })
+        console.log('insertado');
+    }
+
+    submitTimePhysicalGames = () =>{
+        axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 9,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.physical_games,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeNonPhysicalgames = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 10,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.non_physical_games,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeSocialNetworks = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 11,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.social_networks,
+        })
+        console.log('insertado');
+    }
+
+    submitTimeArtActivities = () =>{
+         axios.post('http://localhost:4000/api/actividadesAlumno',{
+            idActividad: 12,
+            idAlumno: this.state.user_id,
+            tiempo: this.state.art_activities,
+        })
+        console.log('insertado');
     }
 
     render() {
@@ -616,14 +639,14 @@ export default class Activities extends Component {
                 <CssBaseline />
                 <div className={useStyles.paper}>
                     <div align="center">
-                        <Avatar className={useStyles.avatar}>
-                            <LockOutlinedIcon />
-                        </Avatar>
                     </div>
                     <br />
-                    <Typography component="h1" variant="h5" align="center">
-                        Registrarse
-                    </Typography>
+                    <main role="main" className="inner cover">
+                        <h1 className="cover-heading">Registro de actividades</h1>
+                        <p className="lead">Para llevar a cabo un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
+                        <p className="lead">
+                        </p>
+                    </main>
                     <div>
                         <br />
                         <form className={useStyles.form} noValidate>
@@ -653,25 +676,11 @@ export default class Activities extends Component {
                                 Registrar actividades
                             </Button>
                             <Grid container justify="flex-end">
-                                <Grid item>
-                                    <br />
-                                    <Link to="/login" variant="body2">
-                                        ¿Ya tienes una cuenta? Iniciar sesión
-              </Link>
-                                </Grid>
+
                             </Grid>
                         </form>
                     </div>
                 </div>
-                <Box mt={4}>
-                    <Typography variant="body2" color="textSecondary" align="center">
-                        <Link color="inherit" to="/">
-                            Saving The Word
-      </Link>{' '}
-                        {new Date().getFullYear()}
-                        {'.'}
-                    </Typography>
-                </Box>
             </Container>
         )
     }
