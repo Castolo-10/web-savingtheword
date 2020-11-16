@@ -13,7 +13,6 @@ import axios from 'axios'
 
 export default class Activities extends Component {
     state = {
-        user_id: localStorage.getItem('IdUsuario'),
         id_tv: 0,
         id_series_movies: 0,
         id_homework: 0,
@@ -38,10 +37,19 @@ export default class Activities extends Component {
         non_physical_games: 0,
         social_networks: 0,
         art_activities: 0,
+        user_id: 0,
+        user_name: '',
+        user_age: 0,
+        user_gender: '',
+        user_grade: 0,
     }
 
-    async componentDidMount() {
-        const res = await axios.get(`http://localhost:4000/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
+    componentDidMount() {
+        this.activitiesData();
+    }
+
+    activitiesData = async () => {
+        const res = await axios.get(`http://api-savingtheword.azurewebsites.net/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
         this.setState(
             {
                 id_tv: res.data.data[0].Id_Actividad_Alumno,
@@ -71,6 +79,18 @@ export default class Activities extends Component {
             }
         );
         console.log(this.state);
+        this.studentData();
+    }
+
+    studentData = async () => {
+        const res = await axios.get('http://api-savingtheword.azurewebsites.net/api/alumnos/'+localStorage.getItem('IdUsuario'));
+        this.setState({
+            user_id: localStorage.getItem('IdUsuario'),
+            user_name: res.data.data.Nombre+' '+res.data.data.A_Paterno+' '+res.data.data.A_Materno,
+            user_age: res.data.data.Edad,
+            user_grade: res.data.data.Grado,
+            user_gender: (res.data.data.Genero)?'Hombre':'Mujer',
+        })
     }
 
     onChangeTv = (e) => {
@@ -155,19 +175,11 @@ export default class Activities extends Component {
                         value={this.state.tv}
                         onChange={this.onChangeTv}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Televisión</FormHelperText>
                 </FormControl>
@@ -185,19 +197,11 @@ export default class Activities extends Component {
                         value={this.state.series_movies}
                         onChange={this.onChangeSeriesMovies}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Series y películas</FormHelperText>
 
@@ -216,19 +220,11 @@ export default class Activities extends Component {
                         value={this.state.homework}
                         onChange={this.onChangeHomework}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Tareas</FormHelperText>
                 </FormControl>
@@ -246,19 +242,11 @@ export default class Activities extends Component {
                         value={this.state.study}
                         onChange={this.onChangeStudy}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Estudiar(Repaso)</FormHelperText>
                 </FormControl>
@@ -276,19 +264,11 @@ export default class Activities extends Component {
                         value={this.state.reading}
                         onChange={this.onChangeReading}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Leer</FormHelperText>
                 </FormControl>
@@ -306,19 +286,11 @@ export default class Activities extends Component {
                         value={this.state.play_videogames}
                         onChange={this.onChangePlayVideogames}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Videojuegos</FormHelperText>
                 </FormControl>
@@ -336,19 +308,11 @@ export default class Activities extends Component {
                         value={this.state.board_games}
                         onChange={this.onChangeBoardGames}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Juegos de mesa</FormHelperText>
                 </FormControl>
@@ -366,19 +330,11 @@ export default class Activities extends Component {
                         value={this.state.excersise}
                         onChange={this.onChangeExcersise}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Ejercicio</FormHelperText>
                 </FormControl>
@@ -396,19 +352,11 @@ export default class Activities extends Component {
                         value={this.state.physical_games}
                         onChange={this.onChangePhysicalGames}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Juegos de actividad física</FormHelperText>
                 </FormControl>
@@ -426,19 +374,11 @@ export default class Activities extends Component {
                         value={this.state.non_physical_games}
                         onChange={this.onChangeNonPhysicalGames}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Juegos sin actividad física</FormHelperText>
                 </FormControl>
@@ -456,19 +396,11 @@ export default class Activities extends Component {
                         value={this.state.social_networks}
                         onChange={this.onChangeSocialNetworks}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Redes sociales</FormHelperText>
                 </FormControl>
@@ -486,19 +418,11 @@ export default class Activities extends Component {
                         value={this.state.art_activities}
                         onChange={this.onChangeArtActivities}
                     >
-                        <MenuItem value={0}>N/A</MenuItem>
+                        <MenuItem value={0}>Menos de 1 hora</MenuItem>
                         <MenuItem value={1}>1 hora</MenuItem>
-                        <MenuItem value={2}>2 Horas</MenuItem>
+                        <MenuItem value={2}>2 horas</MenuItem>
                         <MenuItem value={3}>3 horas</MenuItem>
-                        <MenuItem value={4}>4 horas</MenuItem>
-                        <MenuItem value={5}>5 horas</MenuItem>
-                        <MenuItem value={6}>6 horas</MenuItem>
-                        <MenuItem value={7}>7 horas</MenuItem>
-                        <MenuItem value={8}>8 horas</MenuItem>
-                        <MenuItem value={9}>9 horas</MenuItem>
-                        <MenuItem value={10}>10 horas</MenuItem>
-                        <MenuItem value={11}>11 horas</MenuItem>
-                        <MenuItem value={12}>12 horas</MenuItem>
+                        <MenuItem value={4}>4 o más horas</MenuItem>
                     </Select>
                     <FormHelperText>Actividades artísticas</FormHelperText>
                 </FormControl>
@@ -506,14 +430,14 @@ export default class Activities extends Component {
         )
     }
 
-    submitUserInfo = (e) =>{
+    submitUserInfo = (e) => {
         e.preventDefault();
         this.submitActivities();
         alert('Datos actualizados con éxito.');
     }
 
     submitActivities = async () => {
-        await axios.put('http://localhost:4000/api/actividadesAlumno',{
+        await axios.put('http://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
             actividades: [
                 {
                     idActividadAlumno: this.state.id_tv,
@@ -576,10 +500,13 @@ export default class Activities extends Component {
                     </div>
                     <br />
                     <main role="main" className="inner cover">
+                        <h1 className="cover-heading">Datos de estudiante</h1>
+                        <p className="lead">Nombre: {this.state.user_name}.</p>
+                        <p className="lead">Edad: {this.state.user_age} años.</p>
+                        <p className="lead">Género: {this.state.user_gender}.</p>
+                        <p className="lead">Grado: {this.state.user_grade}º de primaria.</p>
                         <h1 className="cover-heading">Registro de actividades</h1>
-                        <p className="lead">Para llevar a cabo un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
-                        <p className="lead">
-                        </p>
+                        <p className="lead">Para realizar un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
                     </main>
                     <div>
                         <br />

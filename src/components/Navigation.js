@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import img from '../img/shortlogo.png'
 
+import RedirectPlay from './RedirectPlay'
+
 export default class Navigation extends Component {
 
     confirmado = localStorage.getItem('confirmado');
@@ -74,7 +76,7 @@ export default class Navigation extends Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="navbar-brand" to="/play">
+                                <Link className="navbar-brand" onClick={RedirectPlay}>
                                     Juega ahora
                                 </Link>
                             </li>

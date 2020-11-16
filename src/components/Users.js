@@ -7,7 +7,7 @@ export default class Users extends Component {
         users: []
     }
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/usuarios')
+        const res = await axios.get('http://api-savingtheword.azurewebsites.net/api/usuarios')
         this.setState({ users: res.data.data });
         console.log(res.data);
         console.log(this.state.users);

@@ -24,7 +24,7 @@ var regex = {
   "lastname": /^[a-zA-Z0-9., ]{3,40}$/,
   "lastname2": /^[a-zA-Z0-9., ]{3,40}$/,
   // eslint-disable-next-line
-  "password": /^[a-zA-Z0-9_ !"#$%&'()*+,-./:;<=>?@^`{|}~\[/\]/\\/]{6,18}$/,
+  "password": /^[a-zA-Z0-9_ !"#$%&'()*+,-./:;<=>?@^`{|}~\[/\]/\\/]{5,18}$/,
   // eslint-disable-next-line
   "mail": /\S+@\S+\.\S+/
 };
@@ -133,6 +133,8 @@ export default class Signin extends Component {
     var v7 = this.validateCombo('gender');
     var v8 = this.validateCombo('grade');
 
+    var v9 = this.validate('lastname2');
+
     this.name_form = v1;
     this.lastname_form = v2;
     this.mail_form = v3;
@@ -143,10 +145,14 @@ export default class Signin extends Component {
     this.gender_form = v7;
     this.grade_form = v8;
 
-    if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8) {
+    this.lastname_form2 = v9;
+
+    if (v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9) {
       return true;
     }
     else {
+      console.log(v9);
+      console.log(this.state);
       document.getElementById("confirm_password").value = "";
       this.setState({ confirm_password: '' });
       return false;
@@ -158,9 +164,8 @@ export default class Signin extends Component {
       document.getElementById("register-btn").disabled=true;
       this.existing_mail = false;
       if(this.validateForm()){
-          console.log('entra if validateForm');
           console.log(this.state);
-          const res = await axios.post('http://localhost:4000/api/usuarios',{
+          const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/usuarios',{
             correo: this.state.mail,
             clave: this.state.password,
             nombre: this.state.name,
@@ -331,7 +336,7 @@ export default class Signin extends Component {
             label="Apellido materno"
             name="lastName2"
             autoComplete="lname2"
-            onChange={this.onChangeLastName}
+            onChange={this.onChangeLastName2}
           />
         </Grid>
       )

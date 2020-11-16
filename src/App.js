@@ -8,7 +8,6 @@ import Home from './components/Home'
 import Login from './components/Login'
 import SignIn from './components/SignIn'
 import Users from './components/Users'
-import Play from './components/Play'
 import Download from './components/Download'
 import Logout from './components/Logout'
 import Profile from './components/Profile'
@@ -23,7 +22,6 @@ function App() {
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} />
         <Route path="/signin" component={SignIn} />
-        <Route path="/play" component={Play} />
         <Route path="/download" component={Download} />
         <Route path="/users" component={Users} />
         <Route path="/logout" component={Logout} />
