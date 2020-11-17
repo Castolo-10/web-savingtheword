@@ -9,10 +9,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-//import axios from 'axios'
+import axios from 'axios'
 
 export default class Calculator extends Component {
     state = {
+        id_tv: 0,
+        id_series_movies: 0,
+        id_homework: 0,
+        id_study: 0,
+        id_reading: 0,
+        id_play_videogames: 0,
+        id_sleep: 0,
+        id_excersise: 0,
+        id_physical_games: 0,
+        id_non_physical_games: 0,
+        id_social_networks: 0,
+        id_art_activities: 0,
         tv: 0,
         series_movies: 0,
         homework: 0,
@@ -25,7 +37,67 @@ export default class Calculator extends Component {
         non_physical_games: 0,
         social_networks: 0,
         art_activities: 0,
-        result: '',
+        result1: '',
+        result2: '',
+    }
+
+    submited = false;
+
+    componentDidMount() {
+        this.activitiesData();
+    }
+
+    activitiesData = async () => {
+        const res = await axios.get(`http://localhost:4000/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
+        this.setState(
+            {
+                id_tv: res.data.data[0].Id_Actividad_Alumno,
+                id_series_movies: res.data.data[1].Id_Actividad_Alumno,
+                id_homework: res.data.data[2].Id_Actividad_Alumno,
+                id_study: res.data.data[3].Id_Actividad_Alumno,
+                id_reading: res.data.data[4].Id_Actividad_Alumno,
+                id_play_videogames: res.data.data[5].Id_Actividad_Alumno,
+                id_sleep: res.data.data[6].Id_Actividad_Alumno,
+                id_excersise: res.data.data[7].Id_Actividad_Alumno,
+                id_physical_games: res.data.data[8].Id_Actividad_Alumno,
+                id_non_physical_games: res.data.data[9].Id_Actividad_Alumno,
+                id_social_networks: res.data.data[10].Id_Actividad_Alumno,
+                id_art_activities: res.data.data[11].Id_Actividad_Alumno,
+                tv: res.data.data[0].Tiempo,
+                series_movies: res.data.data[1].Tiempo,
+                homework: res.data.data[2].Tiempo,
+                study: res.data.data[3].Tiempo,
+                reading: res.data.data[4].Tiempo,
+                play_videogames: res.data.data[5].Tiempo,
+                sleep: res.data.data[6].Tiempo,
+                excersise: res.data.data[7].Tiempo,
+                physical_games: res.data.data[8].Tiempo,
+                non_physical_games: res.data.data[9].Tiempo,
+                social_networks: res.data.data[10].Tiempo,
+                art_activities: res.data.data[11].Tiempo,
+            }
+        );
+        this.obtainFirstResult();
+    }
+
+    obtainFirstResult = async () => {
+        const res = await axios.post('http://localhost:4000/api/calculadora/', {
+            actividad1: this.state.tv,
+            actividad2: this.state.series_movies,
+            actividad3: this.state.homework,
+            actividad4: this.state.study,
+            actividad5: this.state.reading,
+            actividad6: this.state.play_videogames,
+            actividad7: this.state.sleep,
+            actividad8: this.state.excersise,
+            actividad9: this.state.physical_games,
+            actividad10: this.state.non_physical_games,
+            actividad11: this.state.social_networks,
+            actividad12: this.state.art_activities,
+        })
+        this.setState({
+            result1: Number.parseFloat(res.data.data.nivel*100).toFixed(2),
+        })
     }
 
     onChangeTv = (e) => {
@@ -381,71 +453,36 @@ export default class Calculator extends Component {
 
     submitUserInfo = (e) => {
         e.preventDefault();
-        //this.submitActivities();
+        this.submitActivities();
+        this.submited = true;
+    }
+
+    submitActivities = async () => {
+        const res = await axios.post('http://localhost:4000/api/calculadora/', {
+            actividad1: this.state.tv,
+            actividad2: this.state.series_movies,
+            actividad3: this.state.homework,
+            actividad4: this.state.study,
+            actividad5: this.state.reading,
+            actividad6: this.state.play_videogames,
+            actividad7: this.state.sleep,
+            actividad8: this.state.excersise,
+            actividad9: this.state.physical_games,
+            actividad10: this.state.non_physical_games,
+            actividad11: this.state.social_networks,
+            actividad12: this.state.art_activities,
+        })
         this.setState({
-            result: 'Nivel Medio-Alto'
+            result2: Number.parseFloat(res.data.data.nivel*100).toFixed(2),
         })
     }
 
-    // submitActivities = async () => {
-    //     await axios.put('http://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
-    //         actividades: [
-    //             {
-    //                 idActividadAlumno: this.state.id_tv,
-    //                 tiempo: this.state.tv,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_series_movies,
-    //                 tiempo: this.state.series_movies,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_homework,
-    //                 tiempo: this.state.homework,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_study,
-    //                 tiempo: this.state.study,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_reading,
-    //                 tiempo: this.state.reading,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_play_videogames,
-    //                 tiempo: this.state.play_videogames,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_sleep,
-    //                 tiempo: this.state.sleep,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_excersise,
-    //                 tiempo: this.state.excersise,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_physical_games,
-    //                 tiempo: this.state.physical_games,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_non_physical_games,
-    //                 tiempo: this.state.non_physical_games,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_social_networks,
-    //                 tiempo: this.state.social_networks,
-    //             },
-    //             {
-    //                 idActividadAlumno: this.state.id_art_activities,
-    //                 tiempo: this.state.art_activities,
-    //             }
-    //         ]
-    //     })
-    // }
-
     showResult(){
-        return(
-            <h1 className="cover-heading">{this.state.result}</h1>
-        )
+        if(this.submited){
+            return(
+                <h1 className="cover-heading">Nivel calculado: {this.state.result2}%</h1>
+            )
+        }
     }
 
     render() {
@@ -457,8 +494,9 @@ export default class Calculator extends Component {
                     </div>
                     <br />
                     <main role="main" className="inner cover">
-                        <h1 className="cover-heading">Calculadora de nivel de lectura</h1>
+                        <h1 className="cover-heading">Calculadora de nivel de lectura.</h1>
                         <p className="lead">Ingresa tus tiempos invertidos en las siguientes actividades para analizar tu nivel de lectura estimado:</p>
+                        <p className="lead">Tu nivel actual estimado: {this.state.result1}%</p>
                     </main>
                     <div>
                         <br />

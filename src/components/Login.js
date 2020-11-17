@@ -70,7 +70,7 @@ export default class Login extends Component {
     e.preventDefault()
     //Aqui llamamos al post de usuario
     if (this.validateForm() === true) {
-      const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/juego/login', {
+      const res = await axios.post('http://localhost:4000/api/juego/login', {
         correo: this.state.mail,
         clave: this.state.password,
       }

@@ -49,7 +49,7 @@ export default class Activities extends Component {
     }
 
     activitiesData = async () => {
-        const res = await axios.get(`http://api-savingtheword.azurewebsites.net/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
+        const res = await axios.get(`http://localhost:4000/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
         this.setState(
             {
                 id_tv: res.data.data[0].Id_Actividad_Alumno,
@@ -82,7 +82,7 @@ export default class Activities extends Component {
     }
 
     studentData = async () => {
-        const res = await axios.get('http://api-savingtheword.azurewebsites.net/api/alumnos/'+localStorage.getItem('IdUsuario'));
+        const res = await axios.get('http://localhost:4000/api/alumnos/'+localStorage.getItem('IdUsuario'));
         this.setState({
             user_id: localStorage.getItem('IdUsuario'),
             user_name: res.data.data.Nombre+' '+res.data.data.A_Paterno+' '+res.data.data.A_Materno,
@@ -450,7 +450,7 @@ export default class Activities extends Component {
     }
 
     submitActivities = async () => {
-        await axios.put('http://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
+        await axios.put('http://localhost:4000/api/actividadesAlumno', {
             actividades: [
                 {
                     idActividadAlumno: this.state.id_tv,

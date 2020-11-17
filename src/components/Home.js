@@ -9,6 +9,7 @@ export default class Home extends Component {
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
           <main role="main" className="inner cover">
             <img src="../img/logo.png" alt="Logo" width="75%" />
+            <br/>
             <p className="lead" justification="center">Bienvenido! Saving The Word es un juego en el que puedes poner a prueba y mejorar tus habilidades de lectura.</p>
           </main>
 
