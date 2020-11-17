@@ -58,6 +58,18 @@ export default class Navigation extends Component {
         }
     }
 
+    ShowCalculator(){
+        if (this.isLogged()) {
+            return (
+                <li className="nav-item">
+                    <Link className="navbar-brand" to="/calculator">
+                        ¡Quiero mejorar!
+                    </Link>
+                </li>
+            )
+        }
+    }
+
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -65,7 +77,7 @@ export default class Navigation extends Component {
                     <Link className="navbar-brand" to="/">
                         <img src={img} alt="Logo" width="100%" />
                     </Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse sticky-top" id="navbarNav">
@@ -76,7 +88,7 @@ export default class Navigation extends Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="navbar-brand" onClick={RedirectPlay}>
+                                <Link className="navbar-brand" to="/" onClick={RedirectPlay}>
                                     Juega ahora
                                 </Link>
                             </li>
@@ -85,6 +97,7 @@ export default class Navigation extends Component {
                                     Descargar
                                 </Link>
                             </li>
+                            {this.ShowCalculator()}
                             <li className="nav-item" >
                                 {this.ShowLogin()}
                             </li>

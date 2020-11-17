@@ -151,8 +151,6 @@ export default class Signin extends Component {
       return true;
     }
     else {
-      console.log(v9);
-      console.log(this.state);
       document.getElementById("confirm_password").value = "";
       this.setState({ confirm_password: '' });
       return false;
@@ -164,7 +162,6 @@ export default class Signin extends Component {
       document.getElementById("register-btn").disabled=true;
       this.existing_mail = false;
       if(this.validateForm()){
-          console.log(this.state);
           const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/usuarios',{
             correo: this.state.mail,
             clave: this.state.password,
@@ -175,17 +172,14 @@ export default class Signin extends Component {
             grado: this.state.grade,
             genero: this.state.gender,
           })
-          console.log(res);
           if (res.data.result !== 0) {
             this.existing_mail = false;
-            console.log('registrado');
           }
           else if (res.data.result === 0) {
             this.existing_mail = true;
             this.mail_form = false;
             document.getElementById("confirm_password").value = "";
             this.setState({ confirm_password: '' });
-            console.log('no registrado')
             this.forceUpdate();
           }
         AutoLogIn(this.state.mail, this.state.password);
@@ -372,17 +366,18 @@ export default class Signin extends Component {
           value={this.state.age}
           onChange={this.onChangeAge}
         >
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-          <MenuItem value={7}>7</MenuItem>
-          <MenuItem value={8}>8</MenuItem>
-          <MenuItem value={9}>9</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={11}>11</MenuItem>
-          <MenuItem value={12}>12</MenuItem>
-          <MenuItem value={13}>13</MenuItem>
-          <MenuItem value={14}>14</MenuItem>
-          <MenuItem value={15}>15</MenuItem>
+          <MenuItem value={-1}>Edad</MenuItem>
+          <MenuItem value={5}>5 años</MenuItem>
+          <MenuItem value={6}>6 años</MenuItem>
+          <MenuItem value={7}>7 años</MenuItem>
+          <MenuItem value={8}>8 años</MenuItem>
+          <MenuItem value={9}>9 años</MenuItem>
+          <MenuItem value={10}>10 años</MenuItem>
+          <MenuItem value={11}>11 años</MenuItem>
+          <MenuItem value={12}>12 años</MenuItem>
+          <MenuItem value={13}>13 años</MenuItem>
+          <MenuItem value={14}>14 años</MenuItem>
+          <MenuItem value={15}>15 años</MenuItem>
           <MenuItem value={16}>Otra</MenuItem>
         </Select>
         </FormControl>
@@ -400,17 +395,18 @@ export default class Signin extends Component {
           value={this.state.age}
           onChange={this.onChangeAge}
         >
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-          <MenuItem value={7}>7</MenuItem>
-          <MenuItem value={8}>8</MenuItem>
-          <MenuItem value={9}>9</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={11}>11</MenuItem>
-          <MenuItem value={12}>12</MenuItem>
-          <MenuItem value={13}>13</MenuItem>
-          <MenuItem value={14}>14</MenuItem>
-          <MenuItem value={15}>15</MenuItem>
+          <MenuItem value={-1}>Edad</MenuItem>
+          <MenuItem value={5}>5 años</MenuItem>
+          <MenuItem value={6}>6 años</MenuItem>
+          <MenuItem value={7}>7 años</MenuItem>
+          <MenuItem value={8}>8 años</MenuItem>
+          <MenuItem value={9}>9 años</MenuItem>
+          <MenuItem value={10}>10 años</MenuItem>
+          <MenuItem value={11}>11 años</MenuItem>
+          <MenuItem value={12}>12 años</MenuItem>
+          <MenuItem value={13}>13 años</MenuItem>
+          <MenuItem value={14}>14 años</MenuItem>
+          <MenuItem value={15}>15 años</MenuItem>
           <MenuItem value={16}>Otra</MenuItem>
         </Select>
         <FormHelperText>Selecciona una opción</FormHelperText>
@@ -432,6 +428,7 @@ export default class Signin extends Component {
           value={this.state.gender}
           onChange={this.onChangeGender}
         >
+          <MenuItem value={-1}>Género</MenuItem>
           <MenuItem value={0}>Mujer</MenuItem>
           <MenuItem value={1}>Hombre</MenuItem>
         </Select>
@@ -451,6 +448,7 @@ export default class Signin extends Component {
           placeholder="Género"
           onChange={this.onChangeGender}
         >
+          <MenuItem value={-1}>Género</MenuItem>
           <MenuItem value={0}>Mujer</MenuItem>
           <MenuItem value={1}>Hombre</MenuItem>
         </Select>
@@ -473,6 +471,7 @@ export default class Signin extends Component {
           value={this.state.grade}
           onChange={this.onChangeGrade}
         >
+          <MenuItem value={0}>Grado</MenuItem>
           <MenuItem value={1}>1º</MenuItem>
           <MenuItem value={2}>2º</MenuItem>
           <MenuItem value={3}>3º</MenuItem>
@@ -494,6 +493,7 @@ export default class Signin extends Component {
           value={this.state.grade}
           onChange={this.onChangeGrade}
         >
+          <MenuItem value={0}>Grado</MenuItem>
           <MenuItem value={1}>1º</MenuItem>
           <MenuItem value={2}>2º</MenuItem>
           <MenuItem value={3}>3º</MenuItem>

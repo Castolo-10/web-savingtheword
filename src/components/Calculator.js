@@ -9,22 +9,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import axios from 'axios'
+//import axios from 'axios'
 
-export default class Activities extends Component {
+export default class Calculator extends Component {
     state = {
-        id_tv: 0,
-        id_series_movies: 0,
-        id_homework: 0,
-        id_study: 0,
-        id_reading: 0,
-        id_play_videogames: 0,
-        id_sleep: 0,
-        id_excersise: 0,
-        id_physical_games: 0,
-        id_non_physical_games: 0,
-        id_social_networks: 0,
-        id_art_activities: 0,
         tv: 0,
         series_movies: 0,
         homework: 0,
@@ -37,59 +25,7 @@ export default class Activities extends Component {
         non_physical_games: 0,
         social_networks: 0,
         art_activities: 0,
-        user_id: 0,
-        user_name: '',
-        user_age: 0,
-        user_gender: '',
-        user_grade: 0,
-    }
-
-    componentDidMount() {
-        this.activitiesData();
-    }
-
-    activitiesData = async () => {
-        const res = await axios.get(`http://api-savingtheword.azurewebsites.net/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
-        this.setState(
-            {
-                id_tv: res.data.data[0].Id_Actividad_Alumno,
-                id_series_movies: res.data.data[1].Id_Actividad_Alumno,
-                id_homework: res.data.data[2].Id_Actividad_Alumno,
-                id_study: res.data.data[3].Id_Actividad_Alumno,
-                id_reading: res.data.data[4].Id_Actividad_Alumno,
-                id_play_videogames: res.data.data[5].Id_Actividad_Alumno,
-                id_sleep: res.data.data[6].Id_Actividad_Alumno,
-                id_excersise: res.data.data[7].Id_Actividad_Alumno,
-                id_physical_games: res.data.data[8].Id_Actividad_Alumno,
-                id_non_physical_games: res.data.data[9].Id_Actividad_Alumno,
-                id_social_networks: res.data.data[10].Id_Actividad_Alumno,
-                id_art_activities: res.data.data[11].Id_Actividad_Alumno,
-                tv: res.data.data[0].Tiempo,
-                series_movies: res.data.data[1].Tiempo,
-                homework: res.data.data[2].Tiempo,
-                study: res.data.data[3].Tiempo,
-                reading: res.data.data[4].Tiempo,
-                play_videogames: res.data.data[5].Tiempo,
-                sleep: res.data.data[6].Tiempo,
-                excersise: res.data.data[7].Tiempo,
-                physical_games: res.data.data[8].Tiempo,
-                non_physical_games: res.data.data[9].Tiempo,
-                social_networks: res.data.data[10].Tiempo,
-                art_activities: res.data.data[11].Tiempo,
-            }
-        );
-        this.studentData();
-    }
-
-    studentData = async () => {
-        const res = await axios.get('http://api-savingtheword.azurewebsites.net/api/alumnos/'+localStorage.getItem('IdUsuario'));
-        this.setState({
-            user_id: localStorage.getItem('IdUsuario'),
-            user_name: res.data.data.Nombre+' '+res.data.data.A_Paterno+' '+res.data.data.A_Materno,
-            user_age: res.data.data.Edad,
-            user_grade: res.data.data.Grado,
-            user_gender: (res.data.data.Genero)?'Hombre':'Mujer',
-        })
+        result: '',
     }
 
     onChangeTv = (e) => {
@@ -445,63 +381,71 @@ export default class Activities extends Component {
 
     submitUserInfo = (e) => {
         e.preventDefault();
-        this.submitActivities();
-        alert('Datos actualizados con éxito.');
+        //this.submitActivities();
+        this.setState({
+            result: 'Nivel Medio-Alto'
+        })
     }
 
-    submitActivities = async () => {
-        await axios.put('http://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
-            actividades: [
-                {
-                    idActividadAlumno: this.state.id_tv,
-                    tiempo: this.state.tv,
-                },
-                {
-                    idActividadAlumno: this.state.id_series_movies,
-                    tiempo: this.state.series_movies,
-                },
-                {
-                    idActividadAlumno: this.state.id_homework,
-                    tiempo: this.state.homework,
-                },
-                {
-                    idActividadAlumno: this.state.id_study,
-                    tiempo: this.state.study,
-                },
-                {
-                    idActividadAlumno: this.state.id_reading,
-                    tiempo: this.state.reading,
-                },
-                {
-                    idActividadAlumno: this.state.id_play_videogames,
-                    tiempo: this.state.play_videogames,
-                },
-                {
-                    idActividadAlumno: this.state.id_sleep,
-                    tiempo: this.state.sleep,
-                },
-                {
-                    idActividadAlumno: this.state.id_excersise,
-                    tiempo: this.state.excersise,
-                },
-                {
-                    idActividadAlumno: this.state.id_physical_games,
-                    tiempo: this.state.physical_games,
-                },
-                {
-                    idActividadAlumno: this.state.id_non_physical_games,
-                    tiempo: this.state.non_physical_games,
-                },
-                {
-                    idActividadAlumno: this.state.id_social_networks,
-                    tiempo: this.state.social_networks,
-                },
-                {
-                    idActividadAlumno: this.state.id_art_activities,
-                    tiempo: this.state.art_activities,
-                }
-            ]
-        })
+    // submitActivities = async () => {
+    //     await axios.put('http://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
+    //         actividades: [
+    //             {
+    //                 idActividadAlumno: this.state.id_tv,
+    //                 tiempo: this.state.tv,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_series_movies,
+    //                 tiempo: this.state.series_movies,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_homework,
+    //                 tiempo: this.state.homework,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_study,
+    //                 tiempo: this.state.study,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_reading,
+    //                 tiempo: this.state.reading,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_play_videogames,
+    //                 tiempo: this.state.play_videogames,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_sleep,
+    //                 tiempo: this.state.sleep,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_excersise,
+    //                 tiempo: this.state.excersise,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_physical_games,
+    //                 tiempo: this.state.physical_games,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_non_physical_games,
+    //                 tiempo: this.state.non_physical_games,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_social_networks,
+    //                 tiempo: this.state.social_networks,
+    //             },
+    //             {
+    //                 idActividadAlumno: this.state.id_art_activities,
+    //                 tiempo: this.state.art_activities,
+    //             }
+    //         ]
+    //     })
+    // }
+
+    showResult(){
+        return(
+            <h1 className="cover-heading">{this.state.result}</h1>
+        )
     }
 
     render() {
@@ -513,13 +457,8 @@ export default class Activities extends Component {
                     </div>
                     <br />
                     <main role="main" className="inner cover">
-                        <h1 className="cover-heading">Datos de estudiante</h1>
-                        <p className="lead">Nombre: {this.state.user_name}.</p>
-                        <p className="lead">Edad: {this.state.user_age} años.</p>
-                        <p className="lead">Género: {this.state.user_gender}.</p>
-                        <p className="lead">Grado: {this.state.user_grade}º de primaria.</p>
-                        <h1 className="cover-heading">Registro de actividades</h1>
-                        <p className="lead">Para realizar un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
+                        <h1 className="cover-heading">Calculadora de nivel de lectura</h1>
+                        <p className="lead">Ingresa tus tiempos invertidos en las siguientes actividades para analizar tu nivel de lectura estimado:</p>
                     </main>
                     <div>
                         <br />
@@ -547,12 +486,13 @@ export default class Activities extends Component {
                                 className={useStyles.submit}
                                 onClick={this.submitUserInfo}
                             >
-                                Actualizar actividades
+                                Calcular
                             </Button>
-                            <Grid container justify="flex-end">
-
-                            </Grid>
                         </form>
+                        <br/>
+                        <Grid container justify="center">
+                                {this.showResult()}
+                            </Grid>
                     </div>
                 </div>
             </Container>

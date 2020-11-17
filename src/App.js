@@ -12,6 +12,7 @@ import Download from './components/Download'
 import Logout from './components/Logout'
 import Profile from './components/Profile'
 import Activities from './components/Activities'
+import Calculator from './components/Calculator'
 
 function App() {
   return (
@@ -22,11 +23,12 @@ function App() {
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} />
         <Route path="/signin" component={SignIn} />
-        <Route path="/download" component={Download} />
+        <Route path="/download" component={Download} exact/>
         <Route path="/users" component={Users} />
         <Route path="/logout" component={Logout} />
         <Route path="/profile" component={Profile} />
         <Route path="/activities" component={Activities}/>
+        <Route path="/calculator" component={Calculator}/>
       </div>
     </Router>
   );
