@@ -28,6 +28,7 @@ export default class Login extends Component {
   state = {
     mail: '',
     password: '',
+    loading: false,
   }
 
   onChangeMail = (e) => {
@@ -69,6 +70,7 @@ export default class Login extends Component {
   onSubmitData = async (e) => {
     e.preventDefault()
     //Aqui llamamos al post de usuario
+    this.setState({loading: true});
     if (this.validateForm() === true) {
       const res = await axios.post('http://localhost:4000/api/juego/login', {
         correo: this.state.mail,
@@ -79,16 +81,88 @@ export default class Login extends Component {
       if (res.data.result !== 0) {
         localStorage.setItem('IdUsuario', res.data.data.id);
         localStorage.setItem('confirmado', res.data.data.confirmado);
-        alert("Inicio de sesión exitoso.");
+        console.log('Login realizado');
+        if(res.data.data.confirmado === 1){
+          this.getActivitiesInfo();
+        }else{
+          alert("Inicio de sesión exitoso.");
         window.location = "http://localhost:3000/"
+        }
       }
       else if (res.data.result === 0) {
         alert("Correo o contraseña incorrectos.")
         document.getElementById('password').value="";
+        this.setState({loading: false});
       }
+    } else{
+      this.setState({loading: false});
     }
-    this.forceUpdate();
   }
+
+  getUserInfo = async () => {
+    const res = await axios.get('http://localhost:4000/api/alumnos/'+localStorage.getItem('IdUsuario'));
+      localStorage.setItem('user_name', res.data.data.Nombre+' '+res.data.data.A_Paterno+' '+res.data.data.A_Materno);
+      localStorage.setItem('user_age', res.data.data.Edad);
+      localStorage.setItem('user_grade', res.data.data.Grado);
+      localStorage.setItem('user_gender', (res.data.data.Genero)?'Hombre':'Mujer');
+      console.log('informacion guardada');
+
+      this.obtainFirstResultCalculator();
+  }
+
+  getActivitiesInfo= async () => {
+      const res = await axios.get(`http://localhost:4000/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
+      localStorage.setItem('id_tv', res.data.data[0].Id_Actividad_Alumno);
+      localStorage.setItem('id_series_movies', res.data.data[1].Id_Actividad_Alumno);
+      localStorage.setItem('id_id_homework', res.data.data[2].Id_Actividad_Alumno);
+      localStorage.setItem('id_study', res.data.data[3].Id_Actividad_Alumno);
+      localStorage.setItem('id_reading', res.data.data[4].Id_Actividad_Alumno);
+      localStorage.setItem('id_play_videogames', res.data.data[5].Id_Actividad_Alumno);
+      localStorage.setItem('id_sleep', res.data.data[6].Id_Actividad_Alumno);
+      localStorage.setItem('id_excersise', res.data.data[7].Id_Actividad_Alumno);
+      localStorage.setItem('id_physical_games', res.data.data[8].Id_Actividad_Alumno);
+      localStorage.setItem('id_non_physical_games', res.data.data[9].Id_Actividad_Alumno);
+      localStorage.setItem('id_social_networks', res.data.data[10].Id_Actividad_Alumno);
+      localStorage.setItem('id_art_activities', res.data.data[11].Id_Actividad_Alumno);
+
+      localStorage.setItem('tv', res.data.data[0].Tiempo);
+      localStorage.setItem('series_movies', res.data.data[1].Tiempo);
+      localStorage.setItem('homework', res.data.data[2].Tiempo);
+      localStorage.setItem('study', res.data.data[3].Tiempo);
+      localStorage.setItem('reading', res.data.data[4].Tiempo);
+      localStorage.setItem('play_videogames', res.data.data[5].Tiempo);
+      localStorage.setItem('sleep', res.data.data[6].Tiempo);
+      localStorage.setItem('excersise', res.data.data[7].Tiempo);
+      localStorage.setItem('physical_games', res.data.data[8].Tiempo);
+      localStorage.setItem('non_physical_games', res.data.data[9].Tiempo);
+      localStorage.setItem('social_networks', res.data.data[10].Tiempo);
+      localStorage.setItem('art_activities', res.data.data[11].Tiempo);
+
+      console.log('actividades guardadas');
+      this.getUserInfo();
+}
+
+  obtainFirstResultCalculator = async () => {
+  const res = await axios.post('http://localhost:4000/api/calculadora/', {
+      actividad1: localStorage.getItem('tv'),
+      actividad2: localStorage.getItem('series_movies'),
+      actividad3: localStorage.getItem('homework'),
+      actividad4: localStorage.getItem('study'),
+      actividad5: localStorage.getItem('reading'),
+      actividad6: localStorage.getItem('play_videogames'),
+      actividad7: localStorage.getItem('sleep'),
+      actividad8: localStorage.getItem('excersise'),
+      actividad9: localStorage.getItem('physical_games'),
+      actividad10: localStorage.getItem('non_physical_games'),
+      actividad11: localStorage.getItem('social_networks'),
+      actividad12: localStorage.getItem('art_activities'),
+  })
+      localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel*100).toFixed(2));
+      console.log('calculado primer resultado IA');
+
+      alert("Inicio de sesión exitoso.");
+        window.location = "http://localhost:3000/"
+}
 
   ShowFormMail() {
     if (this.mail_form === true) {
@@ -125,6 +199,36 @@ export default class Login extends Component {
     }
   }
 
+  showButton(){
+    if(!this.state.loading){
+      return(
+        <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={useStyles.submit}
+                  onClick={this.onSubmitData}
+                >
+                  Iniciar sesión
+              </Button>
+      )
+    } else{
+      return(
+        <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disabled
+                  color="primary"
+                  className={useStyles.submit}
+                >
+                  Cargando...
+              </Button>
+      )
+    }
+  }
+
   render() {
     return (
       <Container component="main" maxWidth="xs">
@@ -155,16 +259,7 @@ export default class Login extends Component {
             </div>
             <br />
             <div>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={useStyles.submit}
-                onClick={this.onSubmitData}
-              >
-                Iniciar sesión
-            </Button>
+              {this.showButton()}
             </div>
             <br />
             <Grid container justify="flex-end">

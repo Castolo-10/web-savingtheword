@@ -64,6 +64,7 @@ export default class Signin extends Component {
     mail: '',
     password: '',
     confirm_password: '',
+    loading: false,
   }
 
   onChangeName = (e) => {
@@ -158,36 +159,35 @@ export default class Signin extends Component {
   }
 
   onSubmitData = async (e) => {
-      e.preventDefault()
-      document.getElementById("register-btn").disabled=true;
-      this.existing_mail = false;
-      if(this.validateForm()){
-          const res = await axios.post('http://localhost:4000/api/usuarios',{
-            correo: this.state.mail,
-            clave: this.state.password,
-            nombre: this.state.name,
-            aPaterno: this.state.lastname,
-            aMaterno: this.state.lastname2,
-            edad: this.state.age,
-            grado: this.state.grade,
-            genero: this.state.gender,
-          })
-          if (res.data.result !== 0) {
-            this.existing_mail = false;
-          }
-          else if (res.data.result === 0) {
-            this.existing_mail = true;
-            this.mail_form = false;
-            document.getElementById("confirm_password").value = "";
-            this.setState({ confirm_password: '' });
-            this.forceUpdate();
-          }
-        AutoLogIn(this.state.mail, this.state.password);
+    e.preventDefault()
+    this.setState({ loading: true });
+    this.existing_mail = false;
+    if (this.validateForm()) {
+      const res = await axios.post('http://localhost:4000/api/usuarios', {
+        correo: this.state.mail,
+        clave: this.state.password,
+        nombre: this.state.name,
+        aPaterno: this.state.lastname,
+        aMaterno: this.state.lastname2,
+        edad: this.state.age,
+        grado: this.state.grade,
+        genero: this.state.gender,
+      })
+      if (res.data.result !== 0) {
+        this.existing_mail = false;
       }
-      this.forceUpdate();
+      else if (res.data.result === 0) {
+        this.existing_mail = true;
+        this.mail_form = false;
+        document.getElementById("confirm_password").value = "";
+        this.setState({ confirm_password: '' });
+        this.setState({ loading: false });
+      }
+      AutoLogIn(this.state.mail, this.state.password);
+    } else {
+      this.setState({ loading: false });
     }
-
-    
+  }
 
   validate(element) {
     // Preparacion
@@ -230,17 +230,17 @@ export default class Signin extends Component {
     }
   }
 
-  validateCombo(element){
-    if(element === 'age'){
-      return (this.state.age > 4)? true:false;
+  validateCombo(element) {
+    if (element === 'age') {
+      return (this.state.age > 4) ? true : false;
     }
 
-    if(element === 'gender'){
-      return(this.state.gender > -1)?true:false;
+    if (element === 'gender') {
+      return (this.state.gender > -1) ? true : false;
     }
 
-    if(element === 'grade'){
-      return(this.state.grade>0)?true:false;
+    if (element === 'grade') {
+      return (this.state.grade > 0) ? true : false;
     }
   }
 
@@ -354,156 +354,156 @@ export default class Signin extends Component {
     }
   }
 
-  ShowFormAge(){
-    if(this.age_form === true){
-      return(
+  ShowFormAge() {
+    if (this.age_form === true) {
+      return (
         <Grid item sm={4}>
           <FormControl variant="outlined" className={useStyles.formControl}>
-          <FormHelperText>Edad</FormHelperText>
-          <Select 
-          labelId="age"
-          id="age"
-          value={this.state.age}
-          onChange={this.onChangeAge}
-        >
-          <MenuItem value={-1}>Edad</MenuItem>
-          <MenuItem value={5}>5 años</MenuItem>
-          <MenuItem value={6}>6 años</MenuItem>
-          <MenuItem value={7}>7 años</MenuItem>
-          <MenuItem value={8}>8 años</MenuItem>
-          <MenuItem value={9}>9 años</MenuItem>
-          <MenuItem value={10}>10 años</MenuItem>
-          <MenuItem value={11}>11 años</MenuItem>
-          <MenuItem value={12}>12 años</MenuItem>
-          <MenuItem value={13}>13 años</MenuItem>
-          <MenuItem value={14}>14 años</MenuItem>
-          <MenuItem value={15}>15 años</MenuItem>
-          <MenuItem value={16}>Otra</MenuItem>
-        </Select>
-        </FormControl>
-        </Grid>
-      )
-    }
-    else{
-      return(
-          <Grid item sm={4} className={useStyles.form}>
-            <FormControl variant="outlined" className={useStyles.formControl} error>
             <FormHelperText>Edad</FormHelperText>
-        <Select
-          labelId="age"
-          id="age"
-          value={this.state.age}
-          onChange={this.onChangeAge}
-        >
-          <MenuItem value={-1}>Edad</MenuItem>
-          <MenuItem value={5}>5 años</MenuItem>
-          <MenuItem value={6}>6 años</MenuItem>
-          <MenuItem value={7}>7 años</MenuItem>
-          <MenuItem value={8}>8 años</MenuItem>
-          <MenuItem value={9}>9 años</MenuItem>
-          <MenuItem value={10}>10 años</MenuItem>
-          <MenuItem value={11}>11 años</MenuItem>
-          <MenuItem value={12}>12 años</MenuItem>
-          <MenuItem value={13}>13 años</MenuItem>
-          <MenuItem value={14}>14 años</MenuItem>
-          <MenuItem value={15}>15 años</MenuItem>
-          <MenuItem value={16}>Otra</MenuItem>
-        </Select>
-        <FormHelperText>Selecciona una opción</FormHelperText>
-        </FormControl>
+            <Select
+              labelId="age"
+              id="age"
+              value={this.state.age}
+              onChange={this.onChangeAge}
+            >
+              <MenuItem value={-1}>Edad</MenuItem>
+              <MenuItem value={5}>5 años</MenuItem>
+              <MenuItem value={6}>6 años</MenuItem>
+              <MenuItem value={7}>7 años</MenuItem>
+              <MenuItem value={8}>8 años</MenuItem>
+              <MenuItem value={9}>9 años</MenuItem>
+              <MenuItem value={10}>10 años</MenuItem>
+              <MenuItem value={11}>11 años</MenuItem>
+              <MenuItem value={12}>12 años</MenuItem>
+              <MenuItem value={13}>13 años</MenuItem>
+              <MenuItem value={14}>14 años</MenuItem>
+              <MenuItem value={15}>15 años</MenuItem>
+              <MenuItem value={16}>Otra</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      )
+    }
+    else {
+      return (
+        <Grid item sm={4} className={useStyles.form}>
+          <FormControl variant="outlined" className={useStyles.formControl} error>
+            <FormHelperText>Edad</FormHelperText>
+            <Select
+              labelId="age"
+              id="age"
+              value={this.state.age}
+              onChange={this.onChangeAge}
+            >
+              <MenuItem value={-1}>Edad</MenuItem>
+              <MenuItem value={5}>5 años</MenuItem>
+              <MenuItem value={6}>6 años</MenuItem>
+              <MenuItem value={7}>7 años</MenuItem>
+              <MenuItem value={8}>8 años</MenuItem>
+              <MenuItem value={9}>9 años</MenuItem>
+              <MenuItem value={10}>10 años</MenuItem>
+              <MenuItem value={11}>11 años</MenuItem>
+              <MenuItem value={12}>12 años</MenuItem>
+              <MenuItem value={13}>13 años</MenuItem>
+              <MenuItem value={14}>14 años</MenuItem>
+              <MenuItem value={15}>15 años</MenuItem>
+              <MenuItem value={16}>Otra</MenuItem>
+            </Select>
+            <FormHelperText>Selecciona una opción</FormHelperText>
+          </FormControl>
         </Grid>
       )
     }
   }
 
-  ShowFormGender(){
-    if(this.gender_form === true){
-      return(
+  ShowFormGender() {
+    if (this.gender_form === true) {
+      return (
         <Grid item sm={4}>
           <FormControl variant="outlined" className={useStyles.formControl}>
-          <FormHelperText>Género</FormHelperText>
-      <Select
-          labelId="gender"
-          id="gender"
-          value={this.state.gender}
-          onChange={this.onChangeGender}
-        >
-          <MenuItem value={-1}>Género</MenuItem>
-          <MenuItem value={0}>Mujer</MenuItem>
-          <MenuItem value={1}>Hombre</MenuItem>
-        </Select>
-        </FormControl>
-        </Grid>
-      )
-    }
-    else{
-      return(
-          <Grid item sm={4} className={useStyles.form}>
-            <FormControl variant="outlined" className={useStyles.formControl} error>
             <FormHelperText>Género</FormHelperText>
-        <Select
-          labelId="gender"
-          id="gender"
-          value={this.state.gender}
-          placeholder="Género"
-          onChange={this.onChangeGender}
-        >
-          <MenuItem value={-1}>Género</MenuItem>
-          <MenuItem value={0}>Mujer</MenuItem>
-          <MenuItem value={1}>Hombre</MenuItem>
-        </Select>
-        <FormHelperText>Selecciona una opción</FormHelperText>
-        </FormControl>
+            <Select
+              labelId="gender"
+              id="gender"
+              value={this.state.gender}
+              onChange={this.onChangeGender}
+            >
+              <MenuItem value={-1}>Género</MenuItem>
+              <MenuItem value={0}>Mujer</MenuItem>
+              <MenuItem value={1}>Hombre</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      )
+    }
+    else {
+      return (
+        <Grid item sm={4} className={useStyles.form}>
+          <FormControl variant="outlined" className={useStyles.formControl} error>
+            <FormHelperText>Género</FormHelperText>
+            <Select
+              labelId="gender"
+              id="gender"
+              value={this.state.gender}
+              placeholder="Género"
+              onChange={this.onChangeGender}
+            >
+              <MenuItem value={-1}>Género</MenuItem>
+              <MenuItem value={0}>Mujer</MenuItem>
+              <MenuItem value={1}>Hombre</MenuItem>
+            </Select>
+            <FormHelperText>Selecciona una opción</FormHelperText>
+          </FormControl>
         </Grid>
       )
     }
   }
 
-  ShowFormGrade(){
-    if(this.grade_form === true){
-      return(
+  ShowFormGrade() {
+    if (this.grade_form === true) {
+      return (
         <Grid item sm={4}>
           <FormControl variant="outlined" className={useStyles.formControl}>
-          <FormHelperText>Grado</FormHelperText>
-      <Select
-          labelId="grade"
-          id="grade"
-          value={this.state.grade}
-          onChange={this.onChangeGrade}
-        >
-          <MenuItem value={0}>Grado</MenuItem>
-          <MenuItem value={1}>1º</MenuItem>
-          <MenuItem value={2}>2º</MenuItem>
-          <MenuItem value={3}>3º</MenuItem>
-          <MenuItem value={4}>4º</MenuItem>
-          <MenuItem value={5}>5º</MenuItem>
-          <MenuItem value={6}>6º</MenuItem>
-        </Select>
-        </FormControl>
+            <FormHelperText>Grado</FormHelperText>
+            <Select
+              labelId="grade"
+              id="grade"
+              value={this.state.grade}
+              onChange={this.onChangeGrade}
+            >
+              <MenuItem value={0}>Grado</MenuItem>
+              <MenuItem value={1}>1º</MenuItem>
+              <MenuItem value={2}>2º</MenuItem>
+              <MenuItem value={3}>3º</MenuItem>
+              <MenuItem value={4}>4º</MenuItem>
+              <MenuItem value={5}>5º</MenuItem>
+              <MenuItem value={6}>6º</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
       )
-    } else{
-      return(
+    } else {
+      return (
         <Grid item sm={4}>
           <FormControl variant="outlined" className={useStyles.formControl} error>
-          <FormHelperText>Grado</FormHelperText>
-      <Select
-          labelId="grade"
-          id="grade"
-          value={this.state.grade}
-          onChange={this.onChangeGrade}
-        >
-          <MenuItem value={0}>Grado</MenuItem>
-          <MenuItem value={1}>1º</MenuItem>
-          <MenuItem value={2}>2º</MenuItem>
-          <MenuItem value={3}>3º</MenuItem>
-          <MenuItem value={4}>4º</MenuItem>
-          <MenuItem value={5}>5º</MenuItem>
-          <MenuItem value={6}>6º</MenuItem>
-        </Select>
-        
-        <FormHelperText>Selecciona una opción</FormHelperText>
-        </FormControl>
+            <FormHelperText>Grado</FormHelperText>
+            <Select
+              labelId="grade"
+              id="grade"
+              value={this.state.grade}
+              onChange={this.onChangeGrade}
+            >
+              <MenuItem value={0}>Grado</MenuItem>
+              <MenuItem value={1}>1º</MenuItem>
+              <MenuItem value={2}>2º</MenuItem>
+              <MenuItem value={3}>3º</MenuItem>
+              <MenuItem value={4}>4º</MenuItem>
+              <MenuItem value={5}>5º</MenuItem>
+              <MenuItem value={6}>6º</MenuItem>
+            </Select>
+
+            <FormHelperText>Selecciona una opción</FormHelperText>
+          </FormControl>
         </Grid>
       )
     }
@@ -636,6 +636,38 @@ export default class Signin extends Component {
     }
   }
 
+  showButton() {
+    if (!this.state.loading) {
+      return (
+        <Button
+          id="register-btn"
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={useStyles.submit}
+          onClick={this.onSubmitData}
+        >
+          Registrarse
+        </Button>
+      )
+    } else {
+      return (
+        <Button
+          id="register-btn"
+          type="submit"
+          fullWidth
+          variant="contained"
+          disabled
+          color="primary"
+          className={useStyles.submit}
+        >
+          Cargando...
+        </Button>
+      )
+    }
+  }
+
   render() {
     return (
       <Container component="main" maxWidth="xs">
@@ -665,17 +697,7 @@ export default class Signin extends Component {
                 {this.ShowFormConfirmPassword()}
               </Grid>
               <br />
-              <Button
-                id="register-btn"
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={useStyles.submit}
-                onClick={this.onSubmitData}
-              >
-                Registrarse
-          </Button>
+              {this.showButton()}
               <Grid container justify="flex-end">
                 <Grid item>
                   <br />
