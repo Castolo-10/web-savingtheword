@@ -97,7 +97,6 @@ export default class Activities extends Component {
         user_gender: localStorage.getItem('user_gender'),
       }
     );
-    console.log('carga info perfil');
   }
 
   onChangeTv = (e) => {

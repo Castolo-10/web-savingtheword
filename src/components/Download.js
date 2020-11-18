@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import img_pc from '../img/download_pc.jpeg'
-import img_android from '../img/download_android.jpeg'
+import img_pc from '../img/download_pc.png'
+import img_android from '../img/download_android.png'
 import game_pc from '../downloads/STW.zip'
 import game_android from '../downloads/STW.apk'
 

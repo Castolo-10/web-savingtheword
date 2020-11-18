@@ -375,7 +375,7 @@ export default class Activities extends Component {
 
   submitUserInfo = (e) => {
     e.preventDefault();
-    this.setState({ loading: true });
+    this.setState({ loading: true, message:'Confirmando la cuenta...' });
     this.submitActivities();
   }
 
@@ -434,8 +434,8 @@ export default class Activities extends Component {
       ]
     })
     localStorage.setItem('confirmado', 1);
-    alert('Cuenta confirmada con éxito.');
-    window.location = 'http://localhost:3000/logout'
+    alert('¡Cuenta confirmada con éxito!');
+    window.location = 'https://savingtheword.herokuapp.com/logout'
   }
 
   showButton() {

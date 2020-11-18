@@ -19,6 +19,10 @@ import axios from 'axios'
 
 import AutoLogIn from './AutoLogIn'
 
+import LoadingScreen from 'react-loading-screen'
+
+import run from '../img/spr_run.gif'
+
 var regex = {
   "name": /^[a-zA-Z0-9., ]{3,40}$/,
   "lastname": /^[a-zA-Z0-9., ]{3,40}$/,
@@ -65,6 +69,7 @@ export default class Signin extends Component {
     password: '',
     confirm_password: '',
     loading: false,
+    message: ''
   }
 
   onChangeName = (e) => {
@@ -160,7 +165,7 @@ export default class Signin extends Component {
 
   onSubmitData = async (e) => {
     e.preventDefault()
-    this.setState({ loading: true });
+    this.setState({ loading: true, message: 'Registrando...' });
     this.existing_mail = false;
     if (this.validateForm()) {
       const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/usuarios', {
@@ -183,6 +188,7 @@ export default class Signin extends Component {
         this.setState({ confirm_password: '' });
         this.setState({ loading: false });
       }
+      this.setState({message: '¡Registro exitoso!'})
       AutoLogIn(this.state.mail, this.state.password);
     } else {
       this.setState({ loading: false });
@@ -653,17 +659,27 @@ export default class Signin extends Component {
       )
     } else {
       return (
-        <Button
-          id="register-btn"
-          type="submit"
-          fullWidth
-          variant="contained"
-          disabled
-          color="primary"
-          className={useStyles.submit}
+        <div>
+          <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disabled
+                  color="primary"
+                  className={useStyles.submit}
+                >
+                  Cargando...
+              </Button>
+        <LoadingScreen
+          loading={true}
+          bgColor='#f1f1f1'
+          spinnerColor='#9ee5f8'
+          textColor='#676767'
+          logoSrc={run}
+          text={this.state.message}
         >
-          Cargando...
-        </Button>
+        </LoadingScreen>
+        </div>
       )
     }
   }

@@ -54,7 +54,6 @@ export default class Calculator extends Component {
         result1: localStorage.getItem('result1'),
       }
     );
-    console.log('carga info perfil y resultado');
   }
 
   onChangeTv = (e) => {
@@ -418,7 +417,6 @@ export default class Calculator extends Component {
       actividad11: this.state.social_networks,
       actividad12: this.state.art_activities,
     })
-    console.log(res);
     this.setState({
       result2: Number.parseFloat(res.data.data.nivel * 100).toFixed(2),
     })

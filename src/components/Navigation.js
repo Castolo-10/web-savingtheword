@@ -75,7 +75,7 @@ export default class Navigation extends Component {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img src={img} alt="Logo" width="100%" />
+            <img src={img} alt="Logo" width="20%" />
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
