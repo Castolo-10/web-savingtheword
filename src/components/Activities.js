@@ -435,7 +435,7 @@ export default class Activities extends Component {
     })
     localStorage.setItem('confirmado', 1);
     alert('¡Cuenta confirmada con éxito!');
-    window.location = 'https://savingtheword.herokuapp.com/logout'
+    window.location = 'http://localhost:3000/logout'
   }
 
   showButton() {

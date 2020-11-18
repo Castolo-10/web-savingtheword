@@ -178,8 +178,9 @@ export default class Signin extends Component {
         grado: this.state.grade,
         genero: this.state.gender,
       })
-      if (res.data.result !== 0) {
-        this.existing_mail = false;
+      if (res.data.result === 1) {
+        this.setState({message: '¡Registro exitoso!'})
+        AutoLogIn(this.state.mail, this.state.password);
       }
       else if (res.data.result === 0) {
         this.existing_mail = true;
@@ -188,8 +189,6 @@ export default class Signin extends Component {
         this.setState({ confirm_password: '' });
         this.setState({ loading: false });
       }
-      this.setState({message: '¡Registro exitoso!'})
-      AutoLogIn(this.state.mail, this.state.password);
     } else {
       this.setState({ loading: false });
     }
