@@ -72,7 +72,7 @@ export default class Login extends Component {
     //Aqui llamamos al post de usuario
     this.setState({loading: true});
     if (this.validateForm() === true) {
-      const res = await axios.post('http://localhost:4000/api/juego/login', {
+      const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/juego/login', {
         correo: this.state.mail,
         clave: this.state.password,
       }
@@ -100,7 +100,7 @@ export default class Login extends Component {
   }
 
   getUserInfo = async () => {
-    const res = await axios.get('http://localhost:4000/api/alumnos/'+localStorage.getItem('IdUsuario'));
+    const res = await axios.get('http://api-savingtheword.azurewebsites.net/api/alumnos/'+localStorage.getItem('IdUsuario'));
       localStorage.setItem('user_name', res.data.data.Nombre+' '+res.data.data.A_Paterno+' '+res.data.data.A_Materno);
       localStorage.setItem('user_age', res.data.data.Edad);
       localStorage.setItem('user_grade', res.data.data.Grado);
@@ -111,7 +111,7 @@ export default class Login extends Component {
   }
 
   getActivitiesInfo= async () => {
-      const res = await axios.get(`http://localhost:4000/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
+      const res = await axios.get(`http://api-savingtheword.azurewebsites.net/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
       localStorage.setItem('id_tv', res.data.data[0].Id_Actividad_Alumno);
       localStorage.setItem('id_series_movies', res.data.data[1].Id_Actividad_Alumno);
       localStorage.setItem('id_id_homework', res.data.data[2].Id_Actividad_Alumno);
@@ -143,7 +143,7 @@ export default class Login extends Component {
 }
 
   obtainFirstResultCalculator = async () => {
-  const res = await axios.post('http://localhost:4000/api/calculadora/', {
+  const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/calculadora/', {
       actividad1: localStorage.getItem('tv'),
       actividad2: localStorage.getItem('series_movies'),
       actividad3: localStorage.getItem('homework'),
