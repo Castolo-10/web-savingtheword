@@ -97,7 +97,7 @@ export default class Login extends Component {
           this.setState({message: 'Recuperando información del usuario...'})
           this.getActivitiesInfo();
         } else {
-          window.location = "http://localhost:3000/"
+          window.location = "https://savingtheword.herokuapp.com/"
         }
       }
       else if (res.data.result === 0) {
@@ -174,7 +174,7 @@ export default class Login extends Component {
       actividad12: localStorage.getItem('art_activities'),
     })
     localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel * 100).toFixed(2));
-    window.location = "http://localhost:3000/"
+    window.location = "https://savingtheword.herokuapp.com/"
   }
 
   ShowFormMail() {
