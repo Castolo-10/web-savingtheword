@@ -25,18 +25,18 @@ export default class Activities extends Component {
     id_non_physical_games: 0,
     id_social_networks: 0,
     id_art_activities: 0,
-    tv: 0,
-    series_movies: 0,
-    homework: 0,
-    study: 0,
-    reading: 0,
-    play_videogames: 0,
+    tv: 1,
+    series_movies: 1,
+    homework: 1,
+    study: 1,
+    reading: 1,
+    play_videogames: 1,
     sleep: 5,
-    excersise: 0,
-    physical_games: 0,
-    non_physical_games: 0,
-    social_networks: 0,
-    art_activities: 0,
+    excersise: 1,
+    physical_games: 1,
+    non_physical_games: 1,
+    social_networks: 1,
+    art_activities: 1,
     user_id: 0,
     user_name: '',
     user_age: 0,
@@ -178,8 +178,7 @@ export default class Activities extends Component {
             value={this.state.tv}
             onChange={this.onChangeTv}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -201,8 +200,7 @@ export default class Activities extends Component {
             value={this.state.series_movies}
             onChange={this.onChangeSeriesMovies}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -225,8 +223,7 @@ export default class Activities extends Component {
             value={this.state.homework}
             onChange={this.onChangeHomework}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -248,8 +245,7 @@ export default class Activities extends Component {
             value={this.state.study}
             onChange={this.onChangeStudy}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -271,8 +267,7 @@ export default class Activities extends Component {
             value={this.state.reading}
             onChange={this.onChangeReading}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -294,8 +289,7 @@ export default class Activities extends Component {
             value={this.state.play_videogames}
             onChange={this.onChangePlayVideogames}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -317,8 +311,7 @@ export default class Activities extends Component {
             value={this.state.sleep}
             onChange={this.onChangeSleep}
           >
-            <MenuItem value={5}>Menos de 5 horas</MenuItem>
-            <MenuItem value={6}>6 horas</MenuItem>
+            <MenuItem value={6}>6 horas o menos</MenuItem>
             <MenuItem value={7}>7 horas</MenuItem>
             <MenuItem value={8}>8 horas</MenuItem>
             <MenuItem value={9}>9 horas</MenuItem>
@@ -342,8 +335,7 @@ export default class Activities extends Component {
             value={this.state.excersise}
             onChange={this.onChangeExcersise}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -365,8 +357,7 @@ export default class Activities extends Component {
             value={this.state.physical_games}
             onChange={this.onChangePhysicalGames}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -388,8 +379,7 @@ export default class Activities extends Component {
             value={this.state.non_physical_games}
             onChange={this.onChangeNonPhysicalGames}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -411,8 +401,7 @@ export default class Activities extends Component {
             value={this.state.social_networks}
             onChange={this.onChangeSocialNetworks}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>
@@ -434,8 +423,7 @@ export default class Activities extends Component {
             value={this.state.art_activities}
             onChange={this.onChangeArtActivities}
           >
-            <MenuItem value={0}>Menos de 1 hora</MenuItem>
-            <MenuItem value={1}>1 hora</MenuItem>
+            <MenuItem value={1}>1 hora o menos</MenuItem>
             <MenuItem value={2}>2 horas</MenuItem>
             <MenuItem value={3}>3 horas</MenuItem>
             <MenuItem value={4}>4 horas</MenuItem>

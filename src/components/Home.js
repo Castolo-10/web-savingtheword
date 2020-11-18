@@ -13,25 +13,25 @@ export default class Home extends Component {
   render() {
     return (
       
-      <div className="col-12 text-center">
+      <div className="col-12">
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
           <main role="main" className="inner cover">
             <br/><br/>
             <img src={logo} alt="Logo" width="100%" />
             <br/><br/><br/>
-            <h2 className="cover-heading">Saving The Word es un juego serio para desarrollar habilidades de comprensión lectora</h2>
           </main>
           <div className="col">
-          <img src={img_1} alt="img_1" width="75%" />
+          <h2 className="cover-heading">Saving The Word es un juego serio para desarrollar habilidades de comprensión lectora</h2>
+            <img src={img_1} alt="img_1" width="100%" />
           <br/><br/><br/>
           <h3 className="cover-heading">Interactúa con los habitantes de WordTown.</h3>
-          <img src={img_2} alt="img_2" width="75%" />
+          <img src={img_2} alt="img_2" width="60%" />
           <br/><br/><br/>
           <h3 className="cover-heading">Recolecta objetos e intercámbialos por recompensas.</h3>
-          <img src={img_3} alt="img_3" width="75%" />
+          <img src={img_3} alt="img_3" width="60%" />
           <br/><br/><br/>
           <h3 className="cover-heading">Encuentra todas las palabras y úsalas para completar las páginas destrozadas. </h3>
-          <img src={img_4} alt="img_4" width="75%" />
+          <img src={img_4} alt="img_4" width="60%" />
           </div>
         </div>
 
