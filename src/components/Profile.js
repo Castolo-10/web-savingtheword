@@ -11,6 +11,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 import axios from 'axios'
 
+import LoadingScreen from 'react-loading-screen'
+import run from '../img/spr_run.gif'
+
 export default class Activities extends Component {
   state = {
     id_tv: 0,
@@ -47,6 +50,7 @@ export default class Activities extends Component {
     game_errors: 0,
     game_level: '',
     loading: false,
+    message:'',
   }
 
   componentDidMount() {
@@ -437,7 +441,7 @@ export default class Activities extends Component {
 
   submitUserInfo = (e) => {
     e.preventDefault();
-    this.setState({ loading: true });
+    this.setState({ loading: true, message: 'Actualizando información...'});
     this.submitActivities();
   }
 
@@ -507,7 +511,6 @@ export default class Activities extends Component {
       localStorage.setItem('non_physical_games', this.state.non_physical_games);
       localStorage.setItem('social_networks', this.state.social_networks);
       localStorage.setItem('art_activities', this.state.art_activities);
-      console.log('datos actualizados');
       this.obtainFirstResultCalculator();
     } else {
       alert('Algo salió mal, no se han realizado cambios.');
@@ -516,6 +519,7 @@ export default class Activities extends Component {
   }
 
   obtainFirstResultCalculator = async () => {
+    this.setState({message: '¡Datos actualizados!'})
     const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/calculadora/', {
       actividad1: localStorage.getItem('tv'),
       actividad2: localStorage.getItem('series_movies'),
@@ -531,8 +535,6 @@ export default class Activities extends Component {
       actividad12: localStorage.getItem('art_activities'),
     })
     localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel * 100).toFixed(2));
-    console.log('recalculado primer resultado IA');
-    alert('Datos actualizados con éxito.');
     this.setState({ loading: false });
   }
 
@@ -552,16 +554,27 @@ export default class Activities extends Component {
       )
     } else {
       return (
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          disabled
-          color="primary"
-          className={useStyles.submit}
+        <div>
+          <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disabled
+                  color="primary"
+                  className={useStyles.submit}
+                >
+                  Cargando...
+              </Button>
+        <LoadingScreen
+          loading={true}
+          bgColor='#f1f1f1'
+          spinnerColor='#9ee5f8'
+          textColor='#676767'
+          logoSrc={run}
+          text={this.state.message}
         >
-          Cargando...
-        </Button>
+        </LoadingScreen>
+        </div>
       )
     }
   }

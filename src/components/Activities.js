@@ -11,6 +11,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 import axios from 'axios'
 
+import LoadingScreen from 'react-loading-screen'
+import run from '../img/spr_run.gif'
+
 export default class Activities extends Component {
   state = {
     user_id: localStorage.getItem('IdUsuario'),
@@ -27,6 +30,7 @@ export default class Activities extends Component {
     social_networks: 1,
     art_activities: 1,
     loading: false,
+    message: '',
   }
 
   onChangeTv = (e) => {
@@ -431,7 +435,7 @@ export default class Activities extends Component {
     })
     localStorage.setItem('confirmado', 1);
     alert('Cuenta confirmada con éxito.');
-    window.location = 'https://savingtheword.herokuapp.com/logout'
+    window.location = 'http://localhost:3000/logout'
   }
 
   showButton() {
@@ -450,16 +454,27 @@ export default class Activities extends Component {
       )
     } else {
       return (
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          disabled
-          color="primary"
-          className={useStyles.submit}
+        <div>
+          <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disabled
+                  color="primary"
+                  className={useStyles.submit}
+                >
+                  Cargando...
+              </Button>
+        <LoadingScreen
+          loading={true}
+          bgColor='#f1f1f1'
+          spinnerColor='#9ee5f8'
+          textColor='#676767'
+          logoSrc={run}
+          text={this.state.message}
         >
-          Cargando...
-        </Button>
+        </LoadingScreen>
+        </div>
       )
     }
   }

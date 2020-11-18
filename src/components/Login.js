@@ -13,6 +13,10 @@ import Container from '@material-ui/core/Container';
 
 import axios from 'axios'
 
+import LoadingScreen from 'react-loading-screen'
+
+import run from '../img/spr_run.gif'
+
 var regex = {
   "mail": /\S+@\S+\.\S+/
 };
@@ -29,11 +33,12 @@ export default class Login extends Component {
     mail: '',
     password: '',
     loading: false,
+    message: ''
   }
 
-  secondsToTime(time){
-    var minutes = Math.floor(time/60);
-    var seconds = Math.floor(time - (minutes*60));
+  secondsToTime(time) {
+    var minutes = Math.floor(time / 60);
+    var seconds = Math.floor(time - (minutes * 60));
     var string = minutes + ' minutos y ' + seconds + ' segundos.'
     return string;
   }
@@ -77,7 +82,7 @@ export default class Login extends Component {
   onSubmitData = async (e) => {
     e.preventDefault()
     //Aqui llamamos al post de usuario
-    this.setState({loading: true});
+    this.setState({ loading: true, message: 'Iniciando sesión'});
     if (this.validateForm() === true) {
       const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/juego/login', {
         correo: this.state.mail,
@@ -88,77 +93,73 @@ export default class Login extends Component {
       if (res.data.result !== 0) {
         localStorage.setItem('IdUsuario', res.data.data.id);
         localStorage.setItem('confirmado', res.data.data.confirmado);
-        console.log('Login realizado');
-        if(res.data.data.confirmado === 1){
+        if (res.data.data.confirmado === 1) {
+          this.setState({message: 'Recuperando información del usuario...'})
           this.getActivitiesInfo();
-        }else{
-          alert("Inicio de sesión exitoso.");
-        window.location = "https://savingtheword.herokuapp.com/"
+        } else {
+          window.location = "http://localhost:3000/"
         }
       }
       else if (res.data.result === 0) {
+        document.getElementById('password').value = "";
+        this.setState({ loading: false });
         alert("Correo o contraseña incorrectos.")
-        document.getElementById('password').value="";
-        this.setState({loading: false});
       }
-    } else{
-      this.setState({loading: false});
+    } else {
+      this.setState({ loading: false });
     }
   }
 
   getUserInfo = async () => {
-    const res = await axios.get('https://api-savingtheword.azurewebsites.net/api/alumnos/'+localStorage.getItem('IdUsuario'));
-      localStorage.setItem('user_name', res.data.data.Nombre+' '+res.data.data.A_Paterno+' '+res.data.data.A_Materno);
-      localStorage.setItem('user_age', res.data.data.Edad);
-      localStorage.setItem('user_grade', res.data.data.Grado);
-      localStorage.setItem('user_gender', (res.data.data.Genero)?'Hombre':'Mujer');
-      console.log('informacion guardada');
-      if(res.data.data.TiempoTotal > 0){
-        localStorage.setItem('game_data', 1);
-        localStorage.setItem('game_time', this.secondsToTime(res.data.data.TiempoTotal));
-        localStorage.setItem('game_errors', res.data.data.Errores);
-        localStorage.setItem('game_level', (res.data.data.Promedio)?'Medio alto':'Medio bajo');
-        console.log('Datos de juego guardados');
-      } else{
-        localStorage.setItem('game_data', 0);
-      }
-      this.obtainFirstResultCalculator();
+    const res = await axios.get('https://api-savingtheword.azurewebsites.net/api/alumnos/' + localStorage.getItem('IdUsuario'));
+    localStorage.setItem('user_name', res.data.data.Nombre + ' ' + res.data.data.A_Paterno + ' ' + res.data.data.A_Materno);
+    localStorage.setItem('user_age', res.data.data.Edad);
+    localStorage.setItem('user_grade', res.data.data.Grado);
+    localStorage.setItem('user_gender', (res.data.data.Genero) ? 'Hombre' : 'Mujer');
+    if (res.data.data.TiempoTotal > 0) {
+      localStorage.setItem('game_data', 1);
+      localStorage.setItem('game_time', this.secondsToTime(res.data.data.TiempoTotal));
+      localStorage.setItem('game_errors', res.data.data.Errores);
+      localStorage.setItem('game_level', (res.data.data.Promedio) ? 'Medio alto' : 'Medio bajo');
+    } else {
+      localStorage.setItem('game_data', 0);
+    }
+    this.obtainFirstResultCalculator();
   }
 
-  getActivitiesInfo= async () => {
-      const res = await axios.get(`https://api-savingtheword.azurewebsites.net/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
-      localStorage.setItem('id_tv', res.data.data[0].Id_Actividad_Alumno);
-      localStorage.setItem('id_series_movies', res.data.data[1].Id_Actividad_Alumno);
-      localStorage.setItem('id_id_homework', res.data.data[2].Id_Actividad_Alumno);
-      localStorage.setItem('id_study', res.data.data[3].Id_Actividad_Alumno);
-      localStorage.setItem('id_reading', res.data.data[4].Id_Actividad_Alumno);
-      localStorage.setItem('id_play_videogames', res.data.data[5].Id_Actividad_Alumno);
-      localStorage.setItem('id_sleep', res.data.data[6].Id_Actividad_Alumno);
-      localStorage.setItem('id_excersise', res.data.data[7].Id_Actividad_Alumno);
-      localStorage.setItem('id_physical_games', res.data.data[8].Id_Actividad_Alumno);
-      localStorage.setItem('id_non_physical_games', res.data.data[9].Id_Actividad_Alumno);
-      localStorage.setItem('id_social_networks', res.data.data[10].Id_Actividad_Alumno);
-      localStorage.setItem('id_art_activities', res.data.data[11].Id_Actividad_Alumno);
+  getActivitiesInfo = async () => {
+    const res = await axios.get(`https://api-savingtheword.azurewebsites.net/api/actividadesAlumno/alumno/${localStorage.getItem('IdUsuario')}`)
+    localStorage.setItem('id_tv', res.data.data[0].Id_Actividad_Alumno);
+    localStorage.setItem('id_series_movies', res.data.data[1].Id_Actividad_Alumno);
+    localStorage.setItem('id_id_homework', res.data.data[2].Id_Actividad_Alumno);
+    localStorage.setItem('id_study', res.data.data[3].Id_Actividad_Alumno);
+    localStorage.setItem('id_reading', res.data.data[4].Id_Actividad_Alumno);
+    localStorage.setItem('id_play_videogames', res.data.data[5].Id_Actividad_Alumno);
+    localStorage.setItem('id_sleep', res.data.data[6].Id_Actividad_Alumno);
+    localStorage.setItem('id_excersise', res.data.data[7].Id_Actividad_Alumno);
+    localStorage.setItem('id_physical_games', res.data.data[8].Id_Actividad_Alumno);
+    localStorage.setItem('id_non_physical_games', res.data.data[9].Id_Actividad_Alumno);
+    localStorage.setItem('id_social_networks', res.data.data[10].Id_Actividad_Alumno);
+    localStorage.setItem('id_art_activities', res.data.data[11].Id_Actividad_Alumno);
 
-      localStorage.setItem('tv', res.data.data[0].Tiempo);
-      localStorage.setItem('series_movies', res.data.data[1].Tiempo);
-      localStorage.setItem('homework', res.data.data[2].Tiempo);
-      localStorage.setItem('study', res.data.data[3].Tiempo);
-      localStorage.setItem('reading', res.data.data[4].Tiempo);
-      localStorage.setItem('play_videogames', res.data.data[5].Tiempo);
-      localStorage.setItem('sleep', res.data.data[6].Tiempo);
-      localStorage.setItem('excersise', res.data.data[7].Tiempo);
-      localStorage.setItem('physical_games', res.data.data[8].Tiempo);
-      localStorage.setItem('non_physical_games', res.data.data[9].Tiempo);
-      localStorage.setItem('social_networks', res.data.data[10].Tiempo);
-      localStorage.setItem('art_activities', res.data.data[11].Tiempo);
+    localStorage.setItem('tv', res.data.data[0].Tiempo);
+    localStorage.setItem('series_movies', res.data.data[1].Tiempo);
+    localStorage.setItem('homework', res.data.data[2].Tiempo);
+    localStorage.setItem('study', res.data.data[3].Tiempo);
+    localStorage.setItem('reading', res.data.data[4].Tiempo);
+    localStorage.setItem('play_videogames', res.data.data[5].Tiempo);
+    localStorage.setItem('sleep', res.data.data[6].Tiempo);
+    localStorage.setItem('excersise', res.data.data[7].Tiempo);
+    localStorage.setItem('physical_games', res.data.data[8].Tiempo);
+    localStorage.setItem('non_physical_games', res.data.data[9].Tiempo);
+    localStorage.setItem('social_networks', res.data.data[10].Tiempo);
+    localStorage.setItem('art_activities', res.data.data[11].Tiempo);
 
-      console.log('actividades guardadas');
-      this.getUserInfo();
-}
+    this.getUserInfo();
+  }
 
   obtainFirstResultCalculator = async () => {
-  const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/calculadora/', {
+    const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/calculadora/', {
       actividad1: localStorage.getItem('tv'),
       actividad2: localStorage.getItem('series_movies'),
       actividad3: localStorage.getItem('homework'),
@@ -171,13 +172,10 @@ export default class Login extends Component {
       actividad10: localStorage.getItem('non_physical_games'),
       actividad11: localStorage.getItem('social_networks'),
       actividad12: localStorage.getItem('art_activities'),
-  })
-      localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel*100).toFixed(2));
-      console.log('calculado primer resultado IA');
-
-      alert("Inicio de sesión exitoso.");
-        window.location = "https://savingtheword.herokuapp.com/"
-}
+    })
+    localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel * 100).toFixed(2));
+    window.location = "http://localhost:3000/"
+  }
 
   ShowFormMail() {
     if (this.mail_form === true) {
@@ -214,23 +212,24 @@ export default class Login extends Component {
     }
   }
 
-  showButton(){
-    if(!this.state.loading){
-      return(
+  showButton() {
+    if (!this.state.loading) {
+      return (
         <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={useStyles.submit}
-                  onClick={this.onSubmitData}
-                >
-                  Iniciar sesión
-              </Button>
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={useStyles.submit}
+          onClick={this.onSubmitData}
+        >
+          Iniciar sesión
+        </Button>
       )
-    } else{
-      return(
-        <Button
+    } else {
+      return (
+        <div>
+          <Button
                   type="submit"
                   fullWidth
                   variant="contained"
@@ -240,6 +239,16 @@ export default class Login extends Component {
                 >
                   Cargando...
               </Button>
+        <LoadingScreen
+          loading={true}
+          bgColor='#f1f1f1'
+          spinnerColor='#9ee5f8'
+          textColor='#676767'
+          logoSrc={run}
+          text={this.state.message}
+        >
+        </LoadingScreen>
+        </div>
       )
     }
   }
