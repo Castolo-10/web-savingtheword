@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # download resources
-/src/downloads
+#/src/downloads
