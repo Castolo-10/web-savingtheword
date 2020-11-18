@@ -376,7 +376,7 @@ export default class Activities extends Component {
   }
 
   submitActivities = async () => {
-    await axios.post('http://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
+    await axios.post('https://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
       idAlumno: this.state.user_id,
       actividades: [
         {
@@ -431,7 +431,7 @@ export default class Activities extends Component {
     })
     localStorage.setItem('confirmado', 1);
     alert('Cuenta confirmada con éxito.');
-    window.location = 'http://localhost:3000/logout'
+    window.location = 'https://savingtheword.herokuapp.com/logout'
   }
 
   showButton() {

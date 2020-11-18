@@ -32,5 +32,5 @@ export default function Logout() {
   localStorage.setItem('game_errors', null);
   localStorage.setItem('game_level', null);
 
-  window.location = "http://localhost:3000/"
+  window.location = "https://savingtheword.herokuapp.com/"
 }

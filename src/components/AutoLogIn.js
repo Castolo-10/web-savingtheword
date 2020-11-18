@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default async function AutoLogIn(mail, password) {
-  const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/juego/login', {
+  const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/juego/login', {
     correo: mail,
     clave: password,
   }
@@ -9,5 +9,5 @@ export default async function AutoLogIn(mail, password) {
   localStorage.setItem('IdUsuario', res.data.data.id);
   localStorage.setItem('confirmado', res.data.data.confirmado);
   alert("Cuenta registrada exitosamente.");
-  window.location = "http://localhost:3000/activities";
+  window.location = "https://savingtheword.herokuapp.com/activities";
 }

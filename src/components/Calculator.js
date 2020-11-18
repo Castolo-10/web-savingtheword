@@ -404,7 +404,7 @@ export default class Calculator extends Component {
   }
 
   submitActivities = async () => {
-    const res = await axios.post('http://api-savingtheword.azurewebsites.net/api/calculadora/', {
+    const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/calculadora/', {
       actividad1: this.state.tv,
       actividad2: this.state.series_movies,
       actividad3: this.state.homework,
