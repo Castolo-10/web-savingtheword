@@ -482,15 +482,12 @@ export default class Activities extends Component {
         <div className={useStyles.paper}>
           <div align="center">
           </div>
-          <br />
-          <main role="main" className="inner cover">
-            <h1 className="cover-heading">Registro de actividades</h1>
-            <p className="lead">Para realizar un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
-            <p className="lead">
-            </p>
+          <main role="main" className="inner cover"><br/><br/>
+            <h1 className="cover-heading">Registro de actividades</h1><br/>
+            <p className="lead">Para realizar un mejor seguimiento del rendimiento académico del jugador necesitamos conocer el promedio de horas diarias invertidas en las siguientes actividades:</p>
           </main>
           <div>
-            <br />
+            <br /><br/>
             <form className={useStyles.form} noValidate>
               <Grid container spacing={2}>
                 {this.showFormTv()}

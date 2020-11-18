@@ -42,10 +42,20 @@ export default class Activities extends Component {
     user_age: 0,
     user_gender: '',
     user_grade: 0,
+    game_data: 0,
+    game_time: '',
+    game_errors: 0,
+    game_level: '',
     loading: false,
   }
 
   componentDidMount() {
+    this.setState({
+      game_data: localStorage.getItem('game_data'),
+      game_time: localStorage.getItem('game_time'),
+      game_errors: localStorage.getItem('game_errors'),
+      game_level: localStorage.getItem('game_level'),
+    })
     this.activitiesData();
   }
 
@@ -568,6 +578,21 @@ export default class Activities extends Component {
     }
   }
 
+  showGameStats() {
+    if (this.state.game_data === "1") {
+      return (
+        <div>
+          <h1 className="cover-heading">Datos de juego(última partida jugada)</h1><br />
+          <p className="lead">Tiempo de partida: {this.state.game_time}</p>
+          <p className="lead">Número de errores: {this.state.game_errors}</p>
+          <p className="lead">Nivel de partida: {this.state.game_level}</p><br /><br />
+        </div>
+      )
+    } else {
+      return (<div></div>)
+    }
+  }
+
   render() {
     return (
       <Container component="main" maxWidth="md">
@@ -575,18 +600,19 @@ export default class Activities extends Component {
         <div className={useStyles.paper}>
           <div align="center">
           </div>
-          <br />
-          <main role="main" className="inner cover">
-            <h1 className="cover-heading">Datos de estudiante</h1>
+          <main role="main" className="inner cover"><br /><br />
+            <h1 className="cover-heading">Datos de estudiante</h1><br />
             <p className="lead">Nombre: {this.state.user_name}.</p>
             <p className="lead">Edad: {this.state.user_age} años.</p>
             <p className="lead">Género: {this.state.user_gender}.</p>
             <p className="lead">Grado: {this.state.user_grade}º de primaria.</p>
-            <h1 className="cover-heading">Registro de actividades</h1>
+            <br /><br />
+            {this.showGameStats()}
+            <h1 className="cover-heading">Registro de actividades</h1><br />
             <p className="lead">Para realizar un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
           </main>
           <div>
-            <br />
+            <br /><br />
             <form className={useStyles.form} noValidate>
               <Grid container spacing={2}>
                 {this.showFormTv()}

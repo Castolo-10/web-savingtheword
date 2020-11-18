@@ -26,5 +26,11 @@ export default function Logout() {
   localStorage.setItem('non_physical_games', null);
   localStorage.setItem('social_networks', null);
   localStorage.setItem('art_activities', null);
+
+  localStorage.setItem('game_data', null);
+  localStorage.setItem('game_time', null);
+  localStorage.setItem('game_errors', null);
+  localStorage.setItem('game_level', null);
+
   window.location = "http://localhost:3000/"
 }

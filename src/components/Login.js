@@ -31,6 +31,13 @@ export default class Login extends Component {
     loading: false,
   }
 
+  secondsToTime(time){
+    var minutes = Math.floor(time/60);
+    var seconds = Math.floor(time - (minutes*60));
+    var string = minutes + ' minutos y ' + seconds + ' segundos.'
+    return string;
+  }
+
   onChangeMail = (e) => {
     this.setState({
       mail: e.target.value
@@ -106,7 +113,15 @@ export default class Login extends Component {
       localStorage.setItem('user_grade', res.data.data.Grado);
       localStorage.setItem('user_gender', (res.data.data.Genero)?'Hombre':'Mujer');
       console.log('informacion guardada');
-
+      if(res.data.data.TiempoTotal > 0){
+        localStorage.setItem('game_data', 1);
+        localStorage.setItem('game_time', this.secondsToTime(res.data.data.TiempoTotal));
+        localStorage.setItem('game_errors', res.data.data.Errores);
+        localStorage.setItem('game_level', (res.data.data.Promedio)?'Medio alto':'Medio bajo');
+        console.log('Datos de juego guardados');
+      } else{
+        localStorage.setItem('game_data', 0);
+      }
       this.obtainFirstResultCalculator();
   }
 
