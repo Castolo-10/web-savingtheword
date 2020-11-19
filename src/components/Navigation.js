@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+// import img from '../img/s+t+w.gif'
 import img from '../img/shortlogo.png'
 
 import RedirectPlay from './RedirectPlay'
@@ -73,10 +74,9 @@ export default class Navigation extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            <img src={img} alt="Logo" width="20%" />
-          </Link>
+            <Link className="navbar-brand" to="/">
+            <img src={img} alt="Logo" width="100px"/>
+            </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -106,8 +106,6 @@ export default class Navigation extends Component {
               </li>
             </ul>
           </div>
-
-        </div>
       </nav>
     )
   }

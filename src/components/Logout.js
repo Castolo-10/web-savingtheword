@@ -1,3 +1,5 @@
+import getUrl from '../components/getUrl'
+
 export default function Logout() {
   localStorage.setItem('IdUsuario', null);
   localStorage.setItem('confirmado', null);
@@ -32,5 +34,5 @@ export default function Logout() {
   localStorage.setItem('game_errors', null);
   localStorage.setItem('game_level', null);
 
-  window.location = "http://localhost:3000/"
+  window.location = getUrl();
 }

@@ -28,6 +28,8 @@ import spr_run from '../img/spr_run.gif'
 import spr_walking from '../img/spr_walking.gif'
 import spr_watering from '../img/spr_watering.gif'
 
+import getUrl from '../components/getUrl'
+
 export default class Activities extends Component {
   load_image = null;
 
@@ -50,6 +52,7 @@ export default class Activities extends Component {
   }
 
   selectLoadImage(){
+    document.documentElement.scrollTop = 0;
     switch(Math.floor((Math.random()*15))){
       case 0:
         return spr_attack;
@@ -487,7 +490,7 @@ export default class Activities extends Component {
     })
     localStorage.setItem('confirmado', 1);
     alert('¡Cuenta confirmada con éxito!');
-    window.location = 'http://localhost:3000/logout'
+    window.location = getUrl()+'logout';
   }
 
   showButton() {

@@ -55,7 +55,7 @@ export default class Home extends Component {
           <div className="inner">
             <br /><br />
             <Typography variant="body2" color="textSecondary" align="center">
-              <Link color="inherit" to="/">
+              <Link color="inherit" to="/" onClick={document.documentElement.scrollTop = 0}>
                 Saving The Word
       </Link>{' '}
               {new Date().getFullYear()}

@@ -30,6 +30,8 @@ import spr_run from '../img/spr_run.gif'
 import spr_walking from '../img/spr_walking.gif'
 import spr_watering from '../img/spr_watering.gif'
 
+import getUrl from '../components/getUrl'
+
 var regex = {
   "mail": /\S+@\S+\.\S+/
 };
@@ -51,6 +53,7 @@ export default class Login extends Component {
   }
 
 selectLoadImage(){
+  document.documentElement.scrollTop = 0;
   switch(Math.floor((Math.random()*15))){
     case 0:
       return spr_attack;
@@ -147,7 +150,7 @@ selectLoadImage(){
           this.setState({message: 'Recuperando información del usuario...'})
           this.getActivitiesInfo();
         } else {
-          window.location = "http://localhost:3000/"
+          window.location = getUrl();
         }
       }
       else if (res.data.result === 0) {
@@ -224,7 +227,7 @@ selectLoadImage(){
       actividad12: localStorage.getItem('art_activities'),
     })
     localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel * 100).toFixed(2));
-    window.location = "http://localhost:3000/"
+    window.location = getUrl();
   }
 
   ShowFormMail() {

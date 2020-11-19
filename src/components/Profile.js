@@ -81,6 +81,7 @@ export default class Activities extends Component {
   }
 
   selectLoadImage(){
+    document.documentElement.scrollTop = 0;
     switch(Math.floor((Math.random()*15))){
       case 0:
         return spr_attack;
