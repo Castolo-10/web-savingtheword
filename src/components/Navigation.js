@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import img from '../img/s+t+w.gif'
 import img from '../img/shortlogo.png'
 
-import RedirectPlay from './RedirectPlay'
+//import RedirectPlay from './RedirectPlay'
 
 export default class Navigation extends Component {
 
@@ -87,11 +86,11 @@ export default class Navigation extends Component {
                   Inicio
                                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="navbar-brand" to="/" onClick={RedirectPlay}>
                   Juega ahora
                                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="navbar-brand" to="/download">
                   Descargar
