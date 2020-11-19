@@ -12,9 +12,26 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import axios from 'axios'
 
 import LoadingScreen from 'react-loading-screen'
-import run from '../img/spr_run.gif'
+
+import spr_attack from '../img/spr_attack.gif'
+import spr_axe from '../img/spr_axe.gif'
+import spr_carry from '../img/spr_carry.gif'
+import spr_dig from '../img/spr_dig.gif'
+import spr_doing from '../img/spr_doing.gif'
+import spr_hammering from '../img/spr_hammering.gif'
+import spr_idle from '../img/spr_idle.gif'
+import spr_jump from '../img/spr_jump.gif'
+import spr_mining from '../img/spr_mining.gif'
+import spr_reeling from '../img/spr_reeling.gif'
+import spr_roll from '../img/spr_roll.gif'
+import spr_run from '../img/spr_run.gif'
+import spr_walking from '../img/spr_walking.gif'
+import spr_watering from '../img/spr_watering.gif'
 
 export default class Activities extends Component {
+
+  load_image = null;
+
   state = {
     id_tv: 0,
     id_series_movies: 0,
@@ -61,6 +78,41 @@ export default class Activities extends Component {
       game_level: localStorage.getItem('game_level'),
     })
     this.activitiesData();
+  }
+
+  selectLoadImage(){
+    switch(Math.floor((Math.random()*15))){
+      case 0:
+        return spr_attack;
+        case 1:
+        return spr_axe;
+        case 2:
+        return spr_carry;
+        case 3:
+        return spr_dig;
+        case 4:
+        return spr_doing;
+        case 5:
+        return spr_hammering;
+        case 6:
+        return spr_idle;
+        case 7:
+        return spr_jump;
+        case 8:
+        return spr_mining;
+        case 9:
+        return spr_reeling;
+        case 10:
+        return spr_roll;
+        case 11:
+        return spr_run;
+        case 12:
+        return spr_walking;
+        case 13:
+        return spr_watering;
+        default:
+        return spr_idle;
+    }
   }
 
   activitiesData = async () => {
@@ -441,6 +493,7 @@ export default class Activities extends Component {
 
   submitUserInfo = (e) => {
     e.preventDefault();
+    this.load_image = this.selectLoadImage();
     this.setState({ loading: true, message: 'Actualizando información...'});
     this.submitActivities();
   }
@@ -570,7 +623,7 @@ export default class Activities extends Component {
           bgColor='#f1f1f1'
           spinnerColor='#9ee5f8'
           textColor='#676767'
-          logoSrc={run}
+          logoSrc={this.load_image}
           text={this.state.message}
         >
         </LoadingScreen>
@@ -599,20 +652,17 @@ export default class Activities extends Component {
       <Container component="main" maxWidth="md">
         <CssBaseline />
         <div className={useStyles.paper}>
-          <div align="center">
-          </div>
-          <main role="main" className="inner cover"><br /><br />
+        <main role="main" className="inner cover">
             <h1 className="cover-heading">Datos de estudiante</h1><br />
             <p className="lead">Nombre: {this.state.user_name}.</p>
             <p className="lead">Edad: {this.state.user_age} años.</p>
             <p className="lead">Género: {this.state.user_gender}.</p>
             <p className="lead">Grado: {this.state.user_grade}º de primaria.</p>
-            <br /><br />
-            {this.showGameStats()}
-            <h1 className="cover-heading">Registro de actividades</h1><br />
-            <p className="lead">Para realizar un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
+            
           </main>
-          <div>
+        <h1 className="cover-heading">Registro de actividades</h1><br />
+            <p className="lead">Para realizar un mejor seguimiento requerimos conocer el tiempo que el alumno invierte en ciertas actividades clave que afectan su educación</p>
+            <div>
             <br /><br />
             <form className={useStyles.form} noValidate>
               <Grid container spacing={2}>
@@ -633,9 +683,8 @@ export default class Activities extends Component {
               <div>
                 {this.showButton()}
               </div>
-              <Grid container justify="flex-end">
-
-              </Grid>
+              <br /><br />
+              {this.showGameStats()}
             </form>
           </div>
         </div>

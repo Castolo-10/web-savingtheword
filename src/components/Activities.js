@@ -12,9 +12,25 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import axios from 'axios'
 
 import LoadingScreen from 'react-loading-screen'
-import run from '../img/spr_run.gif'
+
+import spr_attack from '../img/spr_attack.gif'
+import spr_axe from '../img/spr_axe.gif'
+import spr_carry from '../img/spr_carry.gif'
+import spr_dig from '../img/spr_dig.gif'
+import spr_doing from '../img/spr_doing.gif'
+import spr_hammering from '../img/spr_hammering.gif'
+import spr_idle from '../img/spr_idle.gif'
+import spr_jump from '../img/spr_jump.gif'
+import spr_mining from '../img/spr_mining.gif'
+import spr_reeling from '../img/spr_reeling.gif'
+import spr_roll from '../img/spr_roll.gif'
+import spr_run from '../img/spr_run.gif'
+import spr_walking from '../img/spr_walking.gif'
+import spr_watering from '../img/spr_watering.gif'
 
 export default class Activities extends Component {
+  load_image = null;
+
   state = {
     user_id: localStorage.getItem('IdUsuario'),
     tv: 1,
@@ -31,6 +47,41 @@ export default class Activities extends Component {
     art_activities: 1,
     loading: false,
     message: '',
+  }
+
+  selectLoadImage(){
+    switch(Math.floor((Math.random()*15))){
+      case 0:
+        return spr_attack;
+        case 1:
+        return spr_axe;
+        case 2:
+        return spr_carry;
+        case 3:
+        return spr_dig;
+        case 4:
+        return spr_doing;
+        case 5:
+        return spr_hammering;
+        case 6:
+        return spr_idle;
+        case 7:
+        return spr_jump;
+        case 8:
+        return spr_mining;
+        case 9:
+        return spr_reeling;
+        case 10:
+        return spr_roll;
+        case 11:
+        return spr_run;
+        case 12:
+        return spr_walking;
+        case 13:
+        return spr_watering;
+        default:
+        return spr_idle;
+    }
   }
 
   onChangeTv = (e) => {
@@ -375,6 +426,7 @@ export default class Activities extends Component {
 
   submitUserInfo = (e) => {
     e.preventDefault();
+    this.load_image = this.selectLoadImage();
     this.setState({ loading: true, message:'Confirmando la cuenta...' });
     this.submitActivities();
   }
@@ -435,7 +487,7 @@ export default class Activities extends Component {
     })
     localStorage.setItem('confirmado', 1);
     alert('¡Cuenta confirmada con éxito!');
-    window.location = 'https://savingtheword.herokuapp.com/logout'
+    window.location = 'http://localhost:3000/logout'
   }
 
   showButton() {
@@ -470,7 +522,7 @@ export default class Activities extends Component {
           bgColor='#f1f1f1'
           spinnerColor='#9ee5f8'
           textColor='#676767'
-          logoSrc={run}
+          logoSrc={this.load_image}
           text={this.state.message}
         >
         </LoadingScreen>
@@ -486,7 +538,7 @@ export default class Activities extends Component {
         <div className={useStyles.paper}>
           <div align="center">
           </div>
-          <main role="main" className="inner cover"><br/><br/>
+          <main role="main" className="inner cover">
             <h1 className="cover-heading">Registro de actividades</h1><br/>
             <p className="lead">Para realizar un mejor seguimiento del rendimiento académico del jugador necesitamos conocer el promedio de horas diarias invertidas en las siguientes actividades:</p>
           </main>

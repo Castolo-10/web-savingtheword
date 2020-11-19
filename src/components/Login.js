@@ -15,7 +15,20 @@ import axios from 'axios'
 
 import LoadingScreen from 'react-loading-screen'
 
-import run from '../img/spr_run.gif'
+import spr_attack from '../img/spr_attack.gif'
+import spr_axe from '../img/spr_axe.gif'
+import spr_carry from '../img/spr_carry.gif'
+import spr_dig from '../img/spr_dig.gif'
+import spr_doing from '../img/spr_doing.gif'
+import spr_hammering from '../img/spr_hammering.gif'
+import spr_idle from '../img/spr_idle.gif'
+import spr_jump from '../img/spr_jump.gif'
+import spr_mining from '../img/spr_mining.gif'
+import spr_reeling from '../img/spr_reeling.gif'
+import spr_roll from '../img/spr_roll.gif'
+import spr_run from '../img/spr_run.gif'
+import spr_walking from '../img/spr_walking.gif'
+import spr_watering from '../img/spr_watering.gif'
 
 var regex = {
   "mail": /\S+@\S+\.\S+/
@@ -28,6 +41,7 @@ var regexErrors = {
 export default class Login extends Component {
 
   mail_form = true;
+  load_image = null;
 
   state = {
     mail: '',
@@ -35,6 +49,41 @@ export default class Login extends Component {
     loading: false,
     message: ''
   }
+
+selectLoadImage(){
+  switch(Math.floor((Math.random()*15))){
+    case 0:
+      return spr_attack;
+      case 1:
+      return spr_axe;
+      case 2:
+      return spr_carry;
+      case 3:
+      return spr_dig;
+      case 4:
+      return spr_doing;
+      case 5:
+      return spr_hammering;
+      case 6:
+      return spr_idle;
+      case 7:
+      return spr_jump;
+      case 8:
+      return spr_mining;
+      case 9:
+      return spr_reeling;
+      case 10:
+      return spr_roll;
+      case 11:
+      return spr_run;
+      case 12:
+      return spr_walking;
+      case 13:
+      return spr_watering;
+      default:
+      return spr_idle;
+  }
+}
 
   secondsToTime(time) {
     var minutes = Math.floor(time / 60);
@@ -81,6 +130,7 @@ export default class Login extends Component {
 
   onSubmitData = async (e) => {
     e.preventDefault()
+    this.load_image = this.selectLoadImage();
     //Aqui llamamos al post de usuario
     this.setState({ loading: true, message: 'Iniciando sesión'});
     if (this.validateForm() === true) {
@@ -97,7 +147,7 @@ export default class Login extends Component {
           this.setState({message: 'Recuperando información del usuario...'})
           this.getActivitiesInfo();
         } else {
-          window.location = "https://savingtheword.herokuapp.com/"
+          window.location = "http://localhost:3000/"
         }
       }
       else if (res.data.result === 0) {
@@ -174,7 +224,7 @@ export default class Login extends Component {
       actividad12: localStorage.getItem('art_activities'),
     })
     localStorage.setItem('result1', Number.parseFloat(res.data.data.nivel * 100).toFixed(2));
-    window.location = "https://savingtheword.herokuapp.com/"
+    window.location = "http://localhost:3000/"
   }
 
   ShowFormMail() {
@@ -244,7 +294,7 @@ export default class Login extends Component {
           bgColor='#f1f1f1'
           spinnerColor='#9ee5f8'
           textColor='#676767'
-          logoSrc={run}
+          logoSrc={this.load_image}
           text={this.state.message}
         >
         </LoadingScreen>

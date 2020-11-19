@@ -469,10 +469,10 @@ export default class Calculator extends Component {
         <div className={useStyles.paper}>
           <div align="center">
           </div>
-          <main role="main" className="inner cover"><br/><br/>
+          <main role="main" className="inner cover">
             <h1 className="cover-heading">Calculadora de nivel de lectura.</h1><br/>
             <p className="lead">Aquí puedes modificar los tiempos invertidos en cada actividad y consultar si estos cambios en la rutina semanal pueden ofrecer un mejor resultado:</p>
-            <br/><p className="lead">Tu nivel actual estimado: {this.state.result1}%</p><br/><br/>
+            <br/><p className="lead">Tu nivel actual estimado: <b>{this.state.result1}%</b></p><br/><br/>
           </main>
           <div>
             <form className={useStyles.form} noValidate>
