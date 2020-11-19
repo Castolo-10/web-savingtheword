@@ -314,7 +314,8 @@ export default class Activities extends Component {
             value={this.state.sleep}
             onChange={this.onChangeSleep}
           >
-            <MenuItem value={6}>6 horas o menos</MenuItem>
+            <MenuItem value={5}>5 horas o menos</MenuItem>
+            <MenuItem value={6}>6 horas</MenuItem>
             <MenuItem value={7}>7 horas</MenuItem>
             <MenuItem value={8}>8 horas</MenuItem>
             <MenuItem value={9}>9 horas</MenuItem>
