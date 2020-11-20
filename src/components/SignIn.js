@@ -219,7 +219,7 @@ export default class Signin extends Component {
     this.setState({ loading: true, message: 'Registrando...' });
     this.existing_mail = false;
     if (this.validateForm()) {
-      const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/usuarios', {
+      const res = await axios.post('http://localhost:4000/api/usuarios', {
         correo: this.state.mail,
         clave: this.state.password,
         nombre: this.state.name,

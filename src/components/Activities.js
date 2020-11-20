@@ -435,7 +435,7 @@ export default class Activities extends Component {
   }
 
   submitActivities = async () => {
-    await axios.post('https://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
+    await axios.post('http://localhost:4000/api/actividadesAlumno', {
       idAlumno: this.state.user_id,
       actividades: [
         {

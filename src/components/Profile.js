@@ -500,7 +500,7 @@ export default class Activities extends Component {
   }
 
   submitActivities = async () => {
-    const res = await axios.put('https://api-savingtheword.azurewebsites.net/api/actividadesAlumno', {
+    const res = await axios.put('http://localhost:4000/api/actividadesAlumno', {
       actividades: [
         {
           idActividadAlumno: this.state.id_tv,
@@ -574,7 +574,7 @@ export default class Activities extends Component {
 
   obtainFirstResultCalculator = async () => {
     this.setState({message: '¡Datos actualizados!'})
-    const res = await axios.post('https://api-savingtheword.azurewebsites.net/api/calculadora/', {
+    const res = await axios.post('http://localhost:4000/api/calculadora/', {
       actividad1: localStorage.getItem('tv'),
       actividad2: localStorage.getItem('series_movies'),
       actividad3: localStorage.getItem('homework'),
